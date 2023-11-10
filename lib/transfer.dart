@@ -11,7 +11,13 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: const Color(0xFF363636)),
+        theme: ThemeData(
+            scaffoldBackgroundColor: const Color(0xFF363636),
+            textSelectionTheme: const TextSelectionThemeData(
+              selectionColor: Colors.grey,
+              selectionHandleColor: Color.fromARGB(255, 123, 122, 122),
+              cursorColor: Colors.grey,
+            )),
         home: const RootPage());
   }
 }
@@ -32,8 +38,9 @@ class _RootPageState extends State<RootPage> {
     {'name': 'Rani', 'acc': '06733212784'},
     {'name': 'Robin', 'acc': '0345328120'},
   ];
-
   List<Map<String, String>> _foundCustomer = [];
+  final _controller = TextEditingController();
+
   @override
   initState() {
     _allCustomer
@@ -79,34 +86,32 @@ class _RootPageState extends State<RootPage> {
             ),
           ),
           Container(
-            alignment: Alignment.topRight,
-            padding: const EdgeInsets.only(
-              top: 10.0,
-              right: 10.0,
-            ),
+            alignment: Alignment.topCenter,
+            padding: const EdgeInsets.only(top: 8),
             child: SizedBox(
-              width: 135.0,
-              child: TextButton(
+              child: TextButton.icon(
+                icon: const Icon(Icons.group_add_sharp),
+                label: const Text('New Account Number',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize:
+                            20.0) // Sesuaikan dengan ukuran yang diinginkan
+                    ),
                 style: TextButton.styleFrom(
-                  backgroundColor: const Color(0xFFD9D9D9),
-                  foregroundColor: const Color(0xFF000000),
-                  textStyle: const TextStyle(fontSize: 20.0),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                ),
+                    foregroundColor: const Color(0xFF000000),
+                    backgroundColor: const Color(0xFFD9D9D9),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    )),
                 onPressed: () {},
-                child: const Text(
-                  'New Account Number',
-                  textAlign: TextAlign.center,
-                ),
               ),
             ),
           ),
-          Padding(
+          Container(
             padding: const EdgeInsets.all(15.0),
             child: Column(children: [
               TextField(
+                controller: _controller,
                 onChanged: (value) => _runFilter(value),
                 autofocus: false,
                 style: const TextStyle(
@@ -117,6 +122,20 @@ class _RootPageState extends State<RootPage> {
                   filled: true,
                   fillColor: const Color(0xFFD9D9D9),
                   hintText: 'Search',
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    size: 30.0,
+                    color: Color(0xFF000000),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.clear),
+                    color: const Color(0xFF4B4B4B),
+                    splashColor: Colors.transparent,
+                    onPressed: () {
+                      _controller.clear();
+                      _runFilter('');
+                    },
+                  ),
                   contentPadding: const EdgeInsets.all(10.0),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
