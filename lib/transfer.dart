@@ -11,7 +11,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: Colors.grey),
+        theme: ThemeData(scaffoldBackgroundColor: const Color(0xFF363636)),
         home: const RootPage());
   }
 }
@@ -26,16 +26,42 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         body: SafeArea(
       child: Column(children: [
-        Center(
+        const Center(
           child: Text(
             'Transfer',
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 25, color: Colors.white),
+              fontWeight: FontWeight.bold,
+              fontSize: 40,
+              height: 1.5,
+              color: Color(0xFFFFFFFF),
+            ),
           ),
-        )
+        ),
+        Container(
+          alignment: Alignment.topRight,
+          padding: const EdgeInsets.only(top: 10.0, right: 10.0),
+          child: SizedBox(
+            width: 150,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: const Color(0xFFD9D9D9),
+                foregroundColor: const Color(0xFF000000),
+                textStyle: const TextStyle(fontSize: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+              ),
+              onPressed: () {},
+              child: const Text(
+                'New Account Number',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ),
       ]),
     ));
   }
