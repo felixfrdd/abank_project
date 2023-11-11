@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'main.dart';
 
 void main() {
   runApp(const MainApp());
@@ -18,18 +20,18 @@ class MainApp extends StatelessWidget {
               selectionHandleColor: Color.fromARGB(255, 123, 122, 122),
               cursorColor: Colors.grey,
             )),
-        home: const RootPage());
+        home: const ListPage());
   }
 }
 
-class RootPage extends StatefulWidget {
-  const RootPage({super.key});
+class ListPage extends StatefulWidget {
+  const ListPage({super.key});
 
   @override
-  State<RootPage> createState() => _RootPageState();
+  State<ListPage> createState() => _ListPageState();
 }
 
-class _RootPageState extends State<RootPage> {
+class _ListPageState extends State<ListPage> {
   final List<Map<String, String>> _allCustomer = [
     {'name': 'Andri', 'acc': '0927831945'},
     {'name': 'Doni', 'acc': '027398432'},
@@ -39,7 +41,7 @@ class _RootPageState extends State<RootPage> {
     {'name': 'Robin', 'acc': '0345328120'},
   ];
   List<Map<String, String>> _foundCustomer = [];
-  final _controller = TextEditingController();
+  final _textEditingController = TextEditingController();
 
   @override
   initState() {
@@ -87,23 +89,26 @@ class _RootPageState extends State<RootPage> {
           ),
           Container(
             alignment: Alignment.topCenter,
-            padding: const EdgeInsets.only(top: 8),
+            padding: const EdgeInsets.only(top: 8.0),
             child: SizedBox(
               child: TextButton.icon(
                 icon: const Icon(Icons.group_add_sharp),
-                label: const Text('New Account Number',
+                label: const Text('New Account',
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize:
-                            20.0) // Sesuaikan dengan ukuran yang diinginkan
-                    ),
+                    style: TextStyle(fontSize: 20.0)),
                 style: TextButton.styleFrom(
                     foregroundColor: const Color(0xFF000000),
                     backgroundColor: const Color(0xFFD9D9D9),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
                     )),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const NewAccountPage(),
+                      ));
+                },
               ),
             ),
           ),
@@ -111,7 +116,7 @@ class _RootPageState extends State<RootPage> {
             padding: const EdgeInsets.all(15.0),
             child: Column(children: [
               TextField(
-                controller: _controller,
+                controller: _textEditingController,
                 onChanged: (value) => _runFilter(value),
                 autofocus: false,
                 style: const TextStyle(
@@ -132,7 +137,7 @@ class _RootPageState extends State<RootPage> {
                     color: const Color(0xFF4B4B4B),
                     splashColor: Colors.transparent,
                     onPressed: () {
-                      _controller.clear();
+                      _textEditingController.clear();
                       _runFilter('');
                     },
                   ),
@@ -202,4 +207,147 @@ class _RootPageState extends State<RootPage> {
       ),
     );
   }
+}
+
+class NewAccountPage extends StatefulWidget {
+  const NewAccountPage({super.key});
+
+  @override
+  State<NewAccountPage> createState() => _NewAccountPageState();
+}
+
+class _NewAccountPageState extends State<NewAccountPage> {
+  final _textEditingController = TextEditingController();
+  String enteredText = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: const Text('New Account'),
+        leading: buildBackButton(context),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: SafeArea(
+          child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(children: [
+              TextField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                  LengthLimitingTextInputFormatter(11)
+                ],
+                controller: _textEditingController,
+                autofocus: false,
+                style: const TextStyle(
+                  fontSize: 22.0,
+                  color: Color(0xFF000000),
+                ),
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: const Color(0xFFD9D9D9),
+                  hintText: 'Account Number',
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.clear),
+                    color: const Color(0xFF4B4B4B),
+                    splashColor: Colors.transparent,
+                    onPressed: () {
+                      _textEditingController.clear();
+                      setState(() {
+                        enteredText = '';
+                      });
+                    },
+                  ),
+                  contentPadding: const EdgeInsets.all(10.0),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                ),
+                onChanged: (text) {
+                  setState(() {
+                    enteredText = text;
+                  });
+                },
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 8.0),
+              ),
+              if (enteredText.length < 10)
+                const Text(
+                  'Minimum 10 digits',
+                  style: TextStyle(color: Colors.red),
+                ),
+            ]),
+          ),
+          Container(
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 15.0),
+            child: SizedBox(
+              child: TextButton(
+                style: TextButton.styleFrom(
+                    textStyle: const TextStyle(fontSize: 20.0),
+                    foregroundColor: const Color(0xFF000000),
+                    backgroundColor: const Color(0xFFD9D9D9),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    )),
+                onPressed: enteredText.length >= 10
+                    ? () {
+                        _showAddedNewAccountDialog(
+                            context, 'Added', 'Account added to Account List');
+                        _textEditingController.clear();
+                        setState(() {
+                          enteredText = '';
+                        });
+                      }
+                    : null,
+                child: const Text('Confirm'),
+              ),
+            ),
+          ),
+        ],
+      )),
+    );
+  }
+}
+
+Future<void> _showAddedNewAccountDialog(
+    BuildContext context, String title, String text) async {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        backgroundColor: const Color(0xFFD9D9D9),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(text),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            style: TextButton.styleFrom(
+              foregroundColor: const Color(0xFF000000),
+            ),
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
 }
