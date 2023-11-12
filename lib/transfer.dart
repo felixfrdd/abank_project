@@ -6,6 +6,37 @@ void main() {
   runApp(const MainApp());
 }
 
+Future<void> _showAddedNewAccountDialog(
+    BuildContext context, String title, String text) async {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        backgroundColor: const Color(0xFFD9D9D9),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(text),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            style: TextButton.styleFrom(
+              foregroundColor: const Color(0xFF000000),
+            ),
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
@@ -37,7 +68,7 @@ class _ListPageState extends State<ListPage> {
     {'name': 'Doni', 'acc': '027398432'},
     {'name': 'Cherry', 'acc': '0867923412'},
     {'name': 'Bonny', 'acc': '0683452379'},
-    {'name': 'Rani', 'acc': '06733212784'},
+    {'name': 'Rani', 'acc': '0673321278'},
     {'name': 'Robin', 'acc': '0345328120'},
   ];
   List<Map<String, String>> _foundCustomer = [];
@@ -136,6 +167,7 @@ class _ListPageState extends State<ListPage> {
                     icon: const Icon(Icons.clear),
                     color: const Color(0xFF4B4B4B),
                     splashColor: Colors.transparent,
+                    splashRadius: 20.0,
                     onPressed: () {
                       _textEditingController.clear();
                       _runFilter('');
@@ -195,7 +227,16 @@ class _ListPageState extends State<ListPage> {
                               color: Color(0xFF000000),
                               fontSize: 16.0,
                             )),
-                        onTap: () {},
+                        onTap: () {
+                          String customerName =
+                              _foundCustomer[index]["name"].toString();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TransferAccountPage(
+                                    allCustomer: _allCustomer),
+                              ));
+                        },
                       ),
                     ),
                   ),
@@ -256,6 +297,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
                     icon: const Icon(Icons.clear),
                     color: const Color(0xFF4B4B4B),
                     splashColor: Colors.transparent,
+                    splashRadius: 20.0,
                     onPressed: () {
                       _textEditingController.clear();
                       setState(() {
@@ -285,7 +327,10 @@ class _NewAccountPageState extends State<NewAccountPage> {
               if (enteredText.length < 10)
                 const Text(
                   'Minimum 10 digits',
-                  style: TextStyle(color: Colors.red),
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 16.0,
+                  ),
                 ),
             ]),
           ),
@@ -321,33 +366,33 @@ class _NewAccountPageState extends State<NewAccountPage> {
   }
 }
 
-Future<void> _showAddedNewAccountDialog(
-    BuildContext context, String title, String text) async {
-  return showDialog<void>(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text(title),
-        backgroundColor: const Color(0xFFD9D9D9),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text(text),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            style: TextButton.styleFrom(
-              foregroundColor: const Color(0xFF000000),
-            ),
-            child: const Text('OK'),
-          ),
+class TransferAccountPage extends StatefulWidget {
+  final List<Map<String, String>> allCustomer;
+  const TransferAccountPage({super.key, required this.allCustomer});
+
+  @override
+  State<TransferAccountPage> createState() => _TransferAccountPageState();
+}
+
+class _TransferAccountPageState extends State<TransferAccountPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Transfer'),
+        leading: buildBackButton(context),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+          child: Column(
+        children: [
+          Container(
+            child: Text(''),
+          )
         ],
-      );
-    },
-  );
+      )),
+    );
+  }
 }
