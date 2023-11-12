@@ -25,9 +25,7 @@ class HomePage extends State<Tutorial> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("ABank"),
-      ),
+      backgroundColor: const Color(0xFF363636),
       bottomNavigationBar: NavigationBar(
         selectedIndex: indexBotNav,
         onDestinationSelected: (int index){
@@ -48,7 +46,7 @@ class HomePage extends State<Tutorial> {
             ),
           NavigationDestination(
             icon: Icon(Icons.qr_code_scanner),
-            label: "",
+            label: "Scan",
             ),
           NavigationDestination(
             icon: Icon(Icons.history_outlined),
@@ -63,36 +61,131 @@ class HomePage extends State<Tutorial> {
           ],
         ),
         body: <Widget>[
-          OverflowBar(
-            alignment: MainAxisAlignment.spaceEvenly,
+          Column( 
             children: [
-              TextButton(
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.no_transfer,
-                    size: 50,),
-                    Text("Transfer"),
-                  ]),
+            Column(children:[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 20, left: 10),
+                    width: 360,
+                    height: 130,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Welcome Back,", 
+                          style: TextStyle(
+                            fontSize: 35, 
+                            color: Colors.white,
+
+                          ),
+                        ),
+                        
+                        Container(
+                          padding: const EdgeInsets.only(top: 5),
+                        ),
+                        
+                        const Text(
+                          "Adrian Muhalim", 
+                          style: TextStyle(
+                            fontSize: 30, 
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold
+                          ),
+                        )
+                    ]),
+                  ),
+                ]
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                margin: const EdgeInsets.only(top: 15),
+                width: 360,
+                height: 175,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.grey,                   
+                  ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    
+                    const Text(
+                      "Balance :",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15
+                      ),),
+                    
+                    const Padding(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text(
+                        "Rp. 102,124,532,312,00",
+                        style: TextStyle(
+                          color: Colors.amberAccent,
+                          fontSize: 15
+                        ),
+                      ),
+                    )
+                    ,
+                    
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20, bottom: 2),
+                      child: Text(
+                        "Account Number",
+                        style: TextStyle(
+                          color: Colors.white,
+
+                        ),),
+                    ),
+                    
+                    Row(
+                      children: [
+                        const Text(
+                          "1234 1234 1234 1234",
+                          style: TextStyle(
+                            color: Colors.amberAccent,
+                          ),),
+                        const Padding(padding: EdgeInsets.only(left: 10)),
+                        InkWell(
+                          onTap: () {},
+                          child: const Icon(
+                            Icons.remove_red_eye,
+                            
+                            ),
+                        )
+                      ],
+                    )
+                    
+                  ],
+                ),
+                )
                 
-                onPressed: () {},),
-                
-              TextButton(child: const Text("Bill"), onPressed: () {}),
-              TextButton(child: const Text("Top Up"), onPressed: () {}),
-            ],
-          ),
+               
+              ],
+            ),
+
+          ],)
+          
+        ,
+          
           Container(
-            // Taru Code sini ei
+            // Containernya bisa ganti widget apa aja, Taru Code sini ei <Transfer>
 
           ),
           Container(
-            // Taru Code sini ei
+            // Containernya bisa ganti widget apa aja, Taru Code sini ei <Scan>
           ),
           Container(
-            // Taru Code sini ei
+            // Containernya bisa ganti widget apa aja, Taru Code sini ei <History>
           ),
           Container(
-            // Taru Code sini ei
+            // Containernya bisa ganti widget apa aja, Taru Code sini ei <My Account>
           ),
 
         ][indexBotNav],
