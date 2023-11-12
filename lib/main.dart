@@ -4,6 +4,58 @@ void main() {
   runApp(const MyApp());
 }
 
+class TransferItem extends StatelessWidget {
+  final String date;
+  final String name;
+  final String currency;
+
+  const TransferItem({
+    required this.date,
+    required this.name,
+    required this.currency,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: 300,
+      color: Colors.grey[200],
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                date,
+                style: const TextStyle(fontSize: 14, color: Colors.black),
+              ),
+              Text(
+                name,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Text(
+            currency,
+            style: const TextStyle(
+              fontSize: 18,
+              color: Color.fromARGB(255, 103, 220, 57),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -95,13 +147,49 @@ class _HomePageState extends State<HomePage> {
     switch (index) {
       case 0:
         return const Center(child: Text('Error'));
+
       case 1:
-        return const Text(
-          'Transfer History',
-          style: TextStyle(fontSize: 24),
-        );
+        return Column(
+          children: [
+            const Text(
+              'Transfer History',
+              style: TextStyle(fontSize: 24),
+            ),
+            Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(width: 2.0, color: Colors.black),
+                  bottom: BorderSide(width: 2.0, color: Colors.black),
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(vertical: 0),
+                child: Column(
+                children: [
+                  TransferItem(
+                    date: '2023-11-10',
+                    name: 'John tony',
+                    currency: 'RP 7.000.000',
+                  ),
+                  TransferItem(
+                    date: '2023-11-09',
+                    name: 'Justin bibir',
+                    currency: 'RP 8.000.000',
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
+
+      case 2:
+        return const Center(child: Text('Error'));
+
       case 3:
         return const Center(child: Text('Error'));
+
       default:
         return Container();
     }
