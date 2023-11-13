@@ -21,7 +21,7 @@ class continueButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
           ),
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: Colors.black,
           minimumSize: const Size(double.infinity, 0),
         ),
         child: const Text(

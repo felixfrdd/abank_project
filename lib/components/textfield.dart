@@ -43,7 +43,7 @@ class _MyTextFieldState extends State<MyTextField> {
             borderSide:
                 const BorderSide(color: Color.fromARGB(255, 56, 56, 56)),
           ),
-          fillColor: const Color.fromRGBO(217, 217, 217, 1),
+          fillColor: const Color(0xFFD9D9D9),
           filled: true,
           hintText: widget.hintText,
           hintStyle: TextStyle(color: Colors.grey[600]),
