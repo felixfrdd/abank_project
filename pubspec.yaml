@@ -7,6 +7,7 @@ environment:
   sdk: '>=3.1.3 <4.0.0'
 
 dependencies:
+  feather_icons: ^1.2.0
   flutter:
     sdk: flutter
 
@@ -17,3 +18,13 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - images/Abank (1).png
+    - lib/icons/lock.png
+    - lib/icons/credit-limit.png
+    - lib/icons/cvv.png
+
+  fonts:
+    - family: Poppins
+      fonts: 
+        - asset: lib/fonts/Poppins-Regular.ttf
