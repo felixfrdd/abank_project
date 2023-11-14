@@ -4,6 +4,33 @@ void main() {
   runApp(const MyApp());
 }
 
+class TransferItemContainer extends StatelessWidget {
+  final Widget child;
+
+  const TransferItemContainer({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 500,
+      height: 150,
+      child: Card(
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.outline,
+          ),
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
 class TransferItem extends StatelessWidget {
   final String date;
   final String name;
@@ -17,38 +44,50 @@ class TransferItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      width: 300,
-      color: Colors.grey[200],
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return TransferItemContainer(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Text(
+            date,
+            style: const TextStyle(fontSize: 14, color: Colors.black),
+          ),
+          Text(
+            name,
+            style: const TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end, // Mengatur posisi teks mata uang ke kanan
             children: [
               Text(
-                date,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-              ),
-              Text(
-                name,
+                'Rp',
                 style: const TextStyle(
                   fontSize: 18,
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 103, 220, 57),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                currency,
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Color.fromARGB(255, 103, 220, 57),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                ',00',
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Color.fromARGB(255, 103, 220, 57),
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ],
-          ),
-          Text(
-            currency,
-            style: const TextStyle(
-              fontSize: 18,
-              color: Color.fromARGB(255, 103, 220, 57),
-              fontWeight: FontWeight.bold,
-            ),
           ),
         ],
       ),
@@ -90,7 +129,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _selectedIndex == 1 // Only show app bar for the "Transfer" page
+      appBar: _selectedIndex == 1
           ? AppBar(
               backgroundColor: const Color(0xFF363636),
               title: Image.asset(
@@ -99,7 +138,7 @@ class _HomePageState extends State<HomePage> {
               ),
               centerTitle: true,
             )
-          : null, // Hide app bar for other pages
+          : null,
       body: Container(
         color: Colors.grey[200],
         child: Align(
@@ -147,49 +186,41 @@ class _HomePageState extends State<HomePage> {
     switch (index) {
       case 0:
         return const Center(child: Text('Error'));
-
       case 1:
-        return Column(
+        return const Column(
           children: [
-            const Text(
+            Text(
               'Transfer History',
               style: TextStyle(fontSize: 24),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
-              decoration: const BoxDecoration(
-                border: Border(
-                  top: BorderSide(width: 2.0, color: Colors.black),
-                  bottom: BorderSide(width: 2.0, color: Colors.black),
-                ),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 0),
-                child: Column(
+              height: 300,
+              child: Column(
                 children: [
-                  TransferItem(
-                    date: '2023-11-10',
-                    name: 'John tony',
-                    currency: 'RP 7.000.000',
+                  TransferItemContainer(
+                    child: TransferItem(
+                      date: '2023-11-10',
+                      name: 'John tony',
+                      currency: '7.000.000',
+                    ),
                   ),
-                  TransferItem(
-                    date: '2023-11-09',
-                    name: 'Justin bibir',
-                    currency: 'RP 8.000.000',
+                  TransferItemContainer(
+                    child: TransferItem(
+                      date: '2023-11-09',
+                      name: 'Justin bibir',
+                      currency: '8.000.000',
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
-      );
-
+          ],
+        );
       case 2:
         return const Center(child: Text('Error'));
-
       case 3:
         return const Center(child: Text('Error'));
-
       default:
         return Container();
     }
