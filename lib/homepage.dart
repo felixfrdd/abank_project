@@ -6,6 +6,7 @@ void main() {
     const MaterialApp(
       title: 'Flutter NavBar',
       home: Tutorial(),
+      debugShowCheckedModeBanner: false
     ),
   );
 }
@@ -111,7 +112,7 @@ class HomePage extends State<Tutorial> {
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
                     borderRadius: BorderRadius.circular(15),
-                    color: Colors.grey,
+                    color: const Color(0xFF4B4B4B),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -191,7 +192,7 @@ class HomePage extends State<Tutorial> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color(0xFF4B4B4B),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Column(
