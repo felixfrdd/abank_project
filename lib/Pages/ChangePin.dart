@@ -41,7 +41,7 @@ class _ChangePinState extends State<ChangePin> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: Colors.green, borderRadius: BorderRadius.circular(15)),
+                  color: Color(0xFFD9D9D9), borderRadius: BorderRadius.circular(15)),
               height: 150,
               width: 200,
               margin: EdgeInsets.only(top: 50, bottom: 45),
@@ -118,7 +118,7 @@ class _ChangePinState extends State<ChangePin> {
         style: TextStyle(fontSize: 25),
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.greenAccent,
+          fillColor: Color(0xFFD9D9D9),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
           contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           labelText: labelText,
