@@ -1,7 +1,7 @@
-import 'package:abank_project/components/continue.dart';
-import 'package:abank_project/components/textfield.dart';
-import 'package:abank_project/pages/registration_page.dart';
 import 'package:flutter/material.dart';
+import 'package:abank_project/widgets_and_functions/continue.dart';
+import 'package:abank_project/widgets_and_functions/textfield.dart';
+import 'package:abank_project/pages/registration_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
