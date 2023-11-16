@@ -106,145 +106,149 @@ class _ListPageState extends State<ListPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: Column(children: [
-          const Center(
-            child: Text(
-              'Transfer',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 40.0,
-                height: 1.5,
-                color: Color(0xFFFFFFFF),
-              ),
-            ),
-          ),
-          Container(
-            alignment: Alignment.topCenter,
-            padding: const EdgeInsets.only(top: 8.0),
-            child: SizedBox(
-              child: TextButton.icon(
-                icon: const Icon(Icons.group_add_sharp),
-                label: const Text('New Account',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20.0)),
-                style: TextButton.styleFrom(
-                    foregroundColor: const Color(0xFF000000),
-                    backgroundColor: const Color(0xFFD9D9D9),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    )),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const NewAccountPage(),
-                      ));
-                },
-              ),
-            ),
-          ),
-          Container(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(children: [
-              TextField(
-                controller: _textEditingController,
-                onChanged: (value) => _runFilter(value),
-                autofocus: false,
-                style: const TextStyle(
-                  fontSize: 22.0,
-                  color: Color(0xFF000000),
-                ),
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: const Color(0xFFD9D9D9),
-                  hintText: 'Search',
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    size: 30.0,
-                    color: Color(0xFF000000),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Center(
+                child: Text(
+                  'Transfer',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40.0,
+                    height: 1.5,
+                    color: Color(0xFFFFFFFF),
                   ),
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.clear),
-                    color: const Color(0xFF4B4B4B),
-                    splashColor: Colors.transparent,
-                    splashRadius: 20.0,
+                ),
+              ),
+              Container(
+                alignment: Alignment.topCenter,
+                padding: const EdgeInsets.only(top: 8.0),
+                child: SizedBox(
+                  child: TextButton.icon(
+                    icon: const Icon(Icons.group_add_sharp),
+                    label: const Text('New Account',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20.0)),
+                    style: TextButton.styleFrom(
+                        foregroundColor: const Color(0xFF000000),
+                        backgroundColor: const Color(0xFFD9D9D9),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        )),
                     onPressed: () {
-                      _textEditingController.clear();
-                      _runFilter('');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NewAccountPage(),
+                          ));
                     },
                   ),
-                  contentPadding: const EdgeInsets.all(10.0),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
                 ),
-              )
-            ]),
-          ),
-          SizedBox(
-            height: 500,
-            width: 380,
-            child: Container(
-              padding: const EdgeInsets.all(15.0),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: const Color(0xFF4B4B4B),
               ),
-              child: Column(children: [
-                const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Account List',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      color: Color(0xFFFFFFFF),
+              Container(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(children: [
+                  TextField(
+                    controller: _textEditingController,
+                    onChanged: (value) => _runFilter(value),
+                    autofocus: false,
+                    style: const TextStyle(
+                      fontSize: 22.0,
+                      color: Color(0xFF000000),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: _foundCustomer.length,
-                    itemBuilder: (context, index) => Card(
-                      color: const Color(0xFFD9D9D9),
-                      margin: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: ListTile(
-                        title: Text(
-                          _foundCustomer[index]['name'].toString(),
-                          style: const TextStyle(
-                            color: Color(0xFF000000),
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
-                          ),
-                        ),
-                        subtitle: Text(_foundCustomer[index]["acc"].toString(),
-                            style: const TextStyle(
-                              color: Color(0xFF000000),
-                              fontSize: 16.0,
-                            )),
-                        onTap: () {
-                          String customerName =
-                              _foundCustomer[index]["name"].toString();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TransferAccountPage(
-                                    allCustomer: _allCustomer),
-                              ));
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: const Color(0xFFD9D9D9),
+                      hintText: 'Search',
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        size: 30.0,
+                        color: Color(0xFF000000),
+                      ),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.clear),
+                        color: const Color(0xFF4B4B4B),
+                        splashColor: Colors.transparent,
+                        splashRadius: 20.0,
+                        onPressed: () {
+                          _textEditingController.clear();
+                          _runFilter('');
                         },
                       ),
+                      contentPadding: const EdgeInsets.all(10.0),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
                     ),
+                  )
+                ]),
+              ),
+              SizedBox(
+                height: 500,
+                width: 380,
+                child: Container(
+                  padding: const EdgeInsets.all(15.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.0),
+                    color: const Color(0xFF4B4B4B),
                   ),
+                  child: Column(children: [
+                    const Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Account List',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Color(0xFFFFFFFF),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: _foundCustomer.length,
+                        itemBuilder: (context, index) => Card(
+                          color: const Color(0xFFD9D9D9),
+                          margin: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: ListTile(
+                            title: Text(
+                              _foundCustomer[index]['name'].toString(),
+                              style: const TextStyle(
+                                color: Color(0xFF000000),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                            subtitle:
+                                Text(_foundCustomer[index]["acc"].toString(),
+                                    style: const TextStyle(
+                                      color: Color(0xFF000000),
+                                      fontSize: 16.0,
+                                    )),
+                            onTap: () {
+                              String customerName =
+                                  _foundCustomer[index]["name"].toString();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TransferAccountPage(
+                                        allCustomer: _allCustomer),
+                                  ));
+                            },
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
                 ),
-              ]),
-            ),
-          ),
-        ]),
+              ),
+            ]),
       ),
     );
   }
@@ -273,6 +277,8 @@ class _NewAccountPageState extends State<NewAccountPage> {
       ),
       body: SafeArea(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             padding: const EdgeInsets.all(15.0),

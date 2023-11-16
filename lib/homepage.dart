@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(
     const MaterialApp(
-      title: 'Flutter NavBar',
-      home: Tutorial(),
-      debugShowCheckedModeBanner: false
-    ),
+        title: 'Flutter NavBar',
+        home: Tutorial(),
+        debugShowCheckedModeBanner: false),
   );
 }
 
@@ -192,7 +190,7 @@ class HomePage extends State<Tutorial> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF4B4B4B),
+                        color: const Color(0xFFD9D9D9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Column(
@@ -212,7 +210,7 @@ class HomePage extends State<Tutorial> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color(0xFFD9D9D9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Column(
@@ -232,7 +230,7 @@ class HomePage extends State<Tutorial> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color(0xFFD9D9D9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Column(
@@ -260,7 +258,7 @@ class HomePage extends State<Tutorial> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color(0xFFD9D9D9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Column(
@@ -280,7 +278,7 @@ class HomePage extends State<Tutorial> {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: const Color(0xFFD9D9D9),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Column(
