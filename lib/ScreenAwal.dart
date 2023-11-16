@@ -32,8 +32,18 @@ class _MyCarouselState extends State<MyCarousel> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return SafeArea(
+    child: Column(
       children: [
+        Container(
+          height: 70,
+          child: Padding(
+          padding: const EdgeInsets.only(top: 20.0),
+          child: Image.asset(
+          'images/50548.png',
+            ),
+          ),
+        ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(5.0, 40.0, 5.0, 5.0),
@@ -42,21 +52,60 @@ class _MyCarouselState extends State<MyCarousel> {
                 CarouselSlider(
                   items: [
                     Container(
-                      color: const Color.fromARGB(0, 168, 168, 168),
-                      child: Center(
-                        child: Image.network('https://imgs.search.brave.com/sVMF2Wkhgg7rtK2yQiiUIbi7L2PpEAe--yjlxvtC4cs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzU4L2Vk/LzJmLzU4ZWQyZmJk/ODZmZTgxMTJkYTg0/NWFiNGQ4YWQ5ODJi/LmpwZw'),
+                      margin: const EdgeInsets.only(bottom: 70),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'images/1.png',
+                            width: 250,
+                            height: 250,
+                          ),
+                          const SizedBox(height: 0),
+                          const Text(
+                            'Kelola keuangan Anda dengan mudah dan aman bersama Aplikasi Mobile Banking ABank',
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                     ),
                     Container(
-                      color: const Color.fromARGB(0, 168, 168, 168),
-                      child: Center(
-                        child: Image.network('https://imgs.search.brave.com/LSmVzGbGArdq2ILkWawT7FMeB8gQZqePtws-lIh6D3I/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzllLzAz/L2RjLzllMDNkYzgx/MjczOWU2NjA2ZWNj/OTRiZGZhZWFmMzEy/LmpwZw'),
+                      margin: const EdgeInsets.only(bottom: 70),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'images/2.png',
+                            width: 250,
+                            height: 250,
+                          ),
+                          const SizedBox(height: 0),
+                          const Text(
+                            'Nikmati kemudahan layanan perbankan di ujung jari Anda',
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                     ),
                     Container(
-                      color: const Color.fromARGB(0, 168, 168, 168),
-                      child: Center(
-                        child: Image.network('https://imgs.search.brave.com/w3N71bPBqU-GPlSjNzYqzRhrNKe0l9rwtTgM_DWZJCs/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9saDMu/Z29vZ2xldXNlcmNv/bnRlbnQuY29tL2V6/NUszQ3BmOWRfVzJ4/c2gzSlZldVV4a213/LVNFdk5FWHVoMk14/S0gyaGdFWGFueHRL/V012SXhvdWRwQllJ/TGM0dEY4SFMzdEhR/Nlo3N3JQM2dOYlRF/ZTdyREU0T196S3dD/LUJGNHhoc1JjVzRu/dz13OTYwLXJqLW51/LWUzNjU.jpeg'),
+                      margin: const EdgeInsets.only(bottom: 70),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'images/3.png',
+                            width: 230,
+                            height: 230,
+                          ),
+                          const SizedBox(height: 0),
+                          const Text(
+                            'Selangkah lebih dekat untuk mengatur keuangan Anda. Mulailah perjalanan Anda dengan Aplikasi Mobile Banking kami',
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -151,6 +200,8 @@ class _MyCarouselState extends State<MyCarousel> {
           ),
         ),
       ],
+    ),
     );
+    
   }
 }
