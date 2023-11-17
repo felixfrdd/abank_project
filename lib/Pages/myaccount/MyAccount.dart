@@ -1,6 +1,6 @@
 import 'package:abank_project/pages/myaccount/SetALimit.dart';
 import 'package:flutter/material.dart';
-import 'package:abank_project/pages/ChangePin.dart';
+import 'package:abank_project/pages/myaccount/ChangePin.dart';
 import 'package:abank_project/pages/myaccount/ViewCVV.dart';
 
 class MyAccount extends StatelessWidget {
