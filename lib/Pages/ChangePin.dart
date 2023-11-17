@@ -18,7 +18,7 @@ class _ChangePinState extends State<ChangePin> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xFF363636),        
+        backgroundColor: Color(0xFF363636),
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
@@ -41,28 +41,35 @@ class _ChangePinState extends State<ChangePin> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: Color(0xFFD9D9D9), borderRadius: BorderRadius.circular(15)),
+                  color: Color(0xFFD9D9D9),
+                  borderRadius: BorderRadius.circular(15)),
               height: 150,
               width: 200,
               margin: EdgeInsets.only(top: 50, bottom: 45),
               padding: EdgeInsets.all(20),
-              child: Image.asset('lib/icons/lock.png'),
+              child: Image.asset('icons/lock.png'),
             ),
             buildTextField(
               controller: _currentPasswordController,
               labelText: "Current Pin",
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             buildTextField(
               controller: _newPasswordController,
               labelText: "New Pin",
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             buildTextField(
               controller: _confirmPasswordController,
               labelText: "Confirm Pin",
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 Container(
@@ -74,9 +81,10 @@ class _ChangePinState extends State<ChangePin> {
                     },
                     child: Text(
                       "Save",
-                      style: TextStyle(fontSize: 20,color:Colors.black),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
-                    padding: EdgeInsets.only(top: 10, bottom: 10, right: 50, left: 50),
+                    padding: EdgeInsets.only(
+                        top: 10, bottom: 10, right: 50, left: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                         side: BorderSide(width: 1, color: Colors.black)),
@@ -96,7 +104,8 @@ class _ChangePinState extends State<ChangePin> {
                       "Cancel",
                       style: TextStyle(fontSize: 20),
                     ),
-                    padding: EdgeInsets.only(top: 10, bottom: 10, right: 45, left: 45),
+                    padding: EdgeInsets.only(
+                        top: 10, bottom: 10, right: 45, left: 45),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                         side: BorderSide(width: 1, color: Colors.black)),
@@ -110,7 +119,8 @@ class _ChangePinState extends State<ChangePin> {
     );
   }
 
-  Widget buildTextField({required TextEditingController controller, required String labelText}) {
+  Widget buildTextField(
+      {required TextEditingController controller, required String labelText}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
@@ -125,7 +135,7 @@ class _ChangePinState extends State<ChangePin> {
         ),
         obscureText: true,
         keyboardType: TextInputType.number,
-        inputFormatters:[
+        inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
           LengthLimitingTextInputFormatter(6),
         ],

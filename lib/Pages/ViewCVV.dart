@@ -47,7 +47,7 @@ class ViewCVV extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'lib/icons/cvv.png',
+                            'icons/cvv.png',
                             height: 140,
                             width: 140,
                             color: Colors.black,
@@ -67,17 +67,17 @@ class ViewCVV extends StatelessWidget {
                     ),
                   ),
                 ),
-                  Container(
+                Container(
                   padding: EdgeInsets.all(10),
                   color: Color(0xFFD9D9D9),
                   height: 60,
                   width: 300,
                   child: Text(
-                    '167', textAlign: TextAlign.center,
+                    '167',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,
-                      
                     ),
                   ),
                 ),
