@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
+import 'pages//home_page.dart';
 import 'pages/transfer/transfer_page.dart';
 
 void main() {
@@ -19,26 +19,41 @@ void main() {
 }
 
 class MainFunction extends StatefulWidget {
-  const MainFunction({super.key});
+  const MainFunction({Key? key}) : super(key: key);
 
   @override
   State<MainFunction> createState() => _MainFunctionState();
 }
 
 class _MainFunctionState extends State<MainFunction> {
-  int indexBotNav = 0;
-  List<Widget> bodies = [const HomePage(), const TransferPage()];
+  int _indexBotNav = 0;
+  List<Widget> bodies = [];
+
+  @override
+  void initState() {
+    super.initState();
+    bodies = [
+      HomePage(onIndexChanged: (index) {
+        setIndex(index);
+      }),
+      const TransferPage(),
+    ];
+  }
+
+  void setIndex(int indexIncoming) {
+    setState(() {
+      _indexBotNav = indexIncoming;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       bottomNavigationBar: NavigationBar(
-        selectedIndex: indexBotNav,
-        onDestinationSelected: (int index) {
-          setState(() {
-            indexBotNav = index;
-          });
+        selectedIndex: _indexBotNav,
+        onDestinationSelected: (int indexIncoming) {
+          setIndex(indexIncoming);
         },
         destinations: const <Widget>[
           NavigationDestination(
@@ -67,7 +82,7 @@ class _MainFunctionState extends State<MainFunction> {
           ),
         ],
       ),
-      body: bodies[indexBotNav],
+      body: bodies[_indexBotNav],
     );
   }
 }
