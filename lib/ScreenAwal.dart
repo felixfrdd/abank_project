@@ -63,7 +63,7 @@ class _MyCarouselState extends State<MyCarousel> {
                           ),
                           const SizedBox(height: 0),
                           const Text(
-                            'Kelola keuangan Anda dengan mudah dan aman bersama Aplikasi Mobile Banking ABank',
+                            'Manage your finances easily and safely with the ABank Mobile Banking Application',
                             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                             textAlign: TextAlign.center,
                           ),
@@ -82,7 +82,7 @@ class _MyCarouselState extends State<MyCarousel> {
                           ),
                           const SizedBox(height: 0),
                           const Text(
-                            'Nikmati kemudahan layanan perbankan di ujung jari Anda',
+                            'Enjoy the convenience of banking services at your fingertips',
                             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                             textAlign: TextAlign.center,
                           ),
@@ -101,7 +101,7 @@ class _MyCarouselState extends State<MyCarousel> {
                           ),
                           const SizedBox(height: 0),
                           const Text(
-                            'Selangkah lebih dekat untuk mengatur keuangan Anda. Mulailah perjalanan Anda dengan Aplikasi Mobile Banking kami',
+                            'One step closer to getting your finances in order. Start your journey with our Mobile Banking App',
                             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
                             textAlign: TextAlign.center,
                           ),
