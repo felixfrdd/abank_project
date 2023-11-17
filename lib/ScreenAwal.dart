@@ -1,29 +1,23 @@
+import 'package:abank_project/pages/login_page.dart';
+import 'package:abank_project/pages/registration_page.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
+  runApp(const MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xFF363636),
         body: MyCarousel(),
       ),
-    );
-  }
+    ));
 }
+
 
 class MyCarousel extends StatefulWidget {
   const MyCarousel({Key? key}) : super(key: key);
 
   @override
-  _MyCarouselState createState() => _MyCarouselState();
+  State<MyCarousel> createState() => _MyCarouselState();
 }
 
 class _MyCarouselState extends State<MyCarousel> {
@@ -170,7 +164,12 @@ class _MyCarouselState extends State<MyCarousel> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Aksi yang akan dilakukan saat tombol LOGIN ditekan
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                  ),
+                  );
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
@@ -184,7 +183,12 @@ class _MyCarouselState extends State<MyCarousel> {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    // Aksi yang akan dilakukan saat tombol REGISTER ditekan
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                    builder: (context) => RegistrationPage(),
+                  ),
+                  );
                   },
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 50),
