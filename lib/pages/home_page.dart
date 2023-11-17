@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final Function(int) onIndexChanged;
+
+  const HomePage({Key? key, required this.onIndexChanged}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -139,7 +141,9 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  widget.onIndexChanged(1);
+                },
                 child: Container(
                     width: 100,
                     height: 100,
