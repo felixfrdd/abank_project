@@ -1,3 +1,4 @@
+import 'package:abank_project/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'pages//home_page.dart';
 import 'pages/transfer/transfer_page.dart';
@@ -13,7 +14,7 @@ void main() {
             selectionHandleColor: Color.fromARGB(255, 123, 122, 122),
             cursorColor: Colors.grey,
           )),
-      home: const MainFunction(),
+      home: LoginPage(),
     ),
   );
 }
