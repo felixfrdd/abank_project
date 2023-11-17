@@ -7,9 +7,12 @@ environment:
   sdk: '>=3.1.3 <4.0.0'
 
 dependencies:
+  feather_icons: ^1.2.0
   firebase_core: ^2.22.0
   flutter:
     sdk: flutter
+  intl: ^0.18.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -18,13 +21,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
   assets:
+    - images/Abank (1).png
+    - icons/lock.png
+    - icons/credit-limit.png
+    - icons/cvv.png
     - images/logo.png
 
   fonts:
     - family: Poppins
-      fonts:
+      fonts: 
+        - asset: fonts/Poppins-Regular.ttf
         - asset: fonts/Poppins-Regular.ttf
         - asset: fonts/Poppins-SemiBold.ttf
           weight: 600
