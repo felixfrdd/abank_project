@@ -10,6 +10,7 @@ dependencies:
   feather_icons: ^1.2.0
   flutter:
     sdk: flutter
+  intl: ^0.18.1
   
 
 dev_dependencies:

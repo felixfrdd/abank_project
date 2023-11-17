@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:abank_project/Pages/MyAccount.dart';
+import 'package:intl/intl.dart';
 
 class SetALimit extends StatelessWidget {
   const SetALimit({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _limitTransfer = TextEditingController(text: '');
-    TextEditingController _limitPenarikan = TextEditingController(text: '');
+    TextEditingController _limitTransfer = TextEditingController(text: 'Rp. 5.000.000');
+    TextEditingController _limitPenarikan = TextEditingController(text: 'Rp. 2.000.000');
 
     return MaterialApp(
       home: Scaffold(
@@ -51,7 +52,7 @@ class SetALimit extends StatelessWidget {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Limit Transfer",
+                    "Transfer Limits",
                     style: TextStyle(fontSize: 24, color: Color(0xFFD9D9D9)),
                   ),
                   SizedBox(height: 15,),
@@ -65,13 +66,19 @@ class SetALimit extends StatelessWidget {
                     ],
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: '5000000',
-                      prefixText: 'Rp ',
+                      // hintText: '5000000',
+                      // prefixText: 'Rp ',
                       filled: true,
                       fillColor: Color(0xFFD9D9D9),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),                       
-                    ),                   
+                    ),            
+                    onChanged: (value) {
+                      _limitTransfer.value = _limitTransfer.value.copyWith(
+                        text: formatCurrency(value),
+                        selection: TextSelection.collapsed(offset: formatCurrency(value).length),
+                      );
+                    },                           
                   ),
                 ],
               ),
@@ -83,7 +90,7 @@ class SetALimit extends StatelessWidget {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Limit Penarikan",
+                    "Withdrawal Limits",
                     style: TextStyle(fontSize: 24, color: Color(0xFFD9D9D9)),
                   ),
                   SizedBox(height: 15,),
@@ -97,13 +104,20 @@ class SetALimit extends StatelessWidget {
                     ],
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: '2000000',
-                      prefixText: 'Rp ',
+                      // hintText: '2000000',
+                      // prefixText: 'Rp ',
                       filled: true,
                       fillColor: Color(0xFFD9D9D9),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                       contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),                       
-                    ),                   
+                    ),      
+                    onChanged: (value) {
+                      _limitPenarikan.value = _limitPenarikan.value.copyWith(
+                        text: formatCurrency(value),
+                        selection: TextSelection.collapsed(offset: formatCurrency(value).length),
+                      );
+                    },    
+
                   ),
                 ],
               ),
@@ -134,8 +148,8 @@ class SetALimit extends StatelessWidget {
                     color: Color(0xFFD9D9D9),
                     onPressed: () {
                       // Menghapus teks pada semua TextField
-                      _limitPenarikan.clear();
-                      _limitTransfer.clear();
+                      _limitPenarikan.text = 'Rp. 2.000.000';
+                      _limitTransfer.text = 'Rp. 5.000.000';
                     },
                     child: Text(
                       "Cancel",
@@ -153,6 +167,15 @@ class SetALimit extends StatelessWidget {
         ),
       ),
     );
+  }
+    String formatCurrency(String value) {
+    final numberFormat = NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0);
+    try {
+      final intValue = int.parse(value);
+      return numberFormat.format(intValue);
+    } catch (e) {
+      return '';
+    }
   }
 }
 

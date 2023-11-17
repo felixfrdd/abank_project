@@ -125,7 +125,10 @@ class _ChangePinState extends State<ChangePin> {
         ),
         obscureText: true,
         keyboardType: TextInputType.number,
-        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
+        inputFormatters:[
+          FilteringTextInputFormatter.digitsOnly,
+          LengthLimitingTextInputFormatter(6),
+        ],
       ),
     );
   }
