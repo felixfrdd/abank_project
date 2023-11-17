@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          fontFamily: 'Poppins',
+          scaffoldBackgroundColor: const Color(0xFF363636),
+          textSelectionTheme: const TextSelectionThemeData(
+            selectionColor: Colors.grey,
+            selectionHandleColor: Color.fromARGB(255, 123, 122, 122),
+            cursorColor: Colors.grey,
+          )),
+      home: const MyApp(),
+    ),
+  );
 }
 
 class TransferItemContainer extends StatelessWidget {
@@ -11,23 +24,9 @@ class TransferItemContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 500,
-      height: 150,
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-          ),
-          borderRadius: const BorderRadius.all(Radius.circular(12)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: child,
-        ),
-      ),
-    );
+    return Padding(
+        padding: EdgeInsets.only(top: 15),
+        child: Card(color: Color(0xFFd9d9d9), elevation: 0, child: child));
   }
 }
 
@@ -36,7 +35,8 @@ class TransferItem extends StatelessWidget {
   final String name;
   final String currency;
 
-  const TransferItem({super.key, 
+  const TransferItem({
+    super.key,
     required this.date,
     required this.name,
     required this.currency,
@@ -154,23 +154,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _selectedIndex == 1
-          ? AppBar(
-              backgroundColor: const Color(0xFF363636),
-              title: Image.asset(
-                'assets/ABank.png',
-                height: AppBar().preferredSize.height,
-              ),
-              centerTitle: true,
-            )
-          : null,
-      body: Container(
-        color: Colors.grey[200],
-        child: Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: _getPage(_selectedIndex),
+      body: SafeArea(
+        child: Container(
+          color: const Color(0xFF363636),
+          child: Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: _getPage(_selectedIndex),
+            ),
           ),
         ),
       ),
@@ -213,28 +205,40 @@ class _HomePageState extends State<HomePage> {
         return const Center(child: Text('Error'));
       case 1:
         return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               'Transfer History',
-              style: TextStyle(fontSize: 24),
+              style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
-            SizedBox(
-              width: double.infinity,
-              height: 300,
-              child: ListView.builder(
-                itemCount: transferHistories.length,
-                itemBuilder: (context, index) {
-                  TransferHistory transfer = transferHistories[index];
-                  return TransferItemContainer(
-                    child: TransferItem(
-                      date: transfer.date,
-                      name: transfer.name,
-                      currency: transfer.currency,
-                    ),
-                  );
-                },
+            Expanded(
+              flex: 12,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Color(0xFF4b4b4b),
+                    borderRadius: BorderRadius.circular(20.0)),
+                width: double.infinity,
+                height: 300,
+                child: ListView.builder(
+                  itemCount: transferHistories.length,
+                  itemBuilder: (context, index) {
+                    TransferHistory transfer = transferHistories[index];
+                    return TransferItemContainer(
+                      child: TransferItem(
+                        date: transfer.date,
+                        name: transfer.name,
+                        currency: transfer.currency,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
+            Expanded(flex: 1, child: Container())
           ],
         );
       case 2:
