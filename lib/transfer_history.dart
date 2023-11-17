@@ -7,7 +7,7 @@ void main() {
 class TransferItemContainer extends StatelessWidget {
   final Widget child;
 
-  const TransferItemContainer({required this.child});
+  const TransferItemContainer({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class TransferItem extends StatelessWidget {
   final String name;
   final String currency;
 
-  const TransferItem({
+  const TransferItem({super.key, 
     required this.date,
     required this.name,
     required this.currency,
@@ -61,11 +61,11 @@ class TransferItem extends StatelessWidget {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end, // Mengatur posisi teks mata uang ke kanan
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
+              const Text(
                 'Rp',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   color: Color.fromARGB(255, 103, 220, 57),
                   fontWeight: FontWeight.bold,
@@ -79,9 +79,9 @@ class TransferItem extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
+              const Text(
                 ',00',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   color: Color.fromARGB(255, 103, 220, 57),
                   fontWeight: FontWeight.bold,
@@ -95,13 +95,38 @@ class TransferItem extends StatelessWidget {
   }
 }
 
+class TransferHistory {
+  final String date;
+  final String name;
+  final String currency;
+
+  TransferHistory({
+    required this.date,
+    required this.name,
+    required this.currency,
+  });
+}
+
+List<TransferHistory> transferHistories = [
+  TransferHistory(
+    date: '2023-11-10',
+    name: 'John Tony',
+    currency: '7.000.000',
+  ),
+  TransferHistory(
+    date: '2023-11-09',
+    name: 'Justin Bibir',
+    currency: '8.000.000',
+  ),
+];
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Navbar dengan Gambar',
+      title: 'History',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -187,32 +212,27 @@ class _HomePageState extends State<HomePage> {
       case 0:
         return const Center(child: Text('Error'));
       case 1:
-        return const Column(
+        return Column(
           children: [
-            Text(
+            const Text(
               'Transfer History',
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(
               width: double.infinity,
               height: 300,
-              child: Column(
-                children: [
-                  TransferItemContainer(
+              child: ListView.builder(
+                itemCount: transferHistories.length,
+                itemBuilder: (context, index) {
+                  TransferHistory transfer = transferHistories[index];
+                  return TransferItemContainer(
                     child: TransferItem(
-                      date: '2023-11-10',
-                      name: 'John tony',
-                      currency: '7.000.000',
+                      date: transfer.date,
+                      name: transfer.name,
+                      currency: transfer.currency,
                     ),
-                  ),
-                  TransferItemContainer(
-                    child: TransferItem(
-                      date: '2023-11-09',
-                      name: 'Justin bibir',
-                      currency: '8.000.000',
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ],
