@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:abank_project/Pages/MyAccount.dart';
+import 'package:abank_project/pages/myaccount/MyAccount.dart';
 import 'package:intl/intl.dart';
 
 class SetALimit extends StatelessWidget {
@@ -8,8 +8,10 @@ class SetALimit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _limitTransfer = TextEditingController(text: 'Rp. 5.000.000');
-    TextEditingController _limitPenarikan = TextEditingController(text: 'Rp. 2.000.000');
+    TextEditingController _limitTransfer =
+        TextEditingController(text: 'Rp. 5.000.000');
+    TextEditingController _limitPenarikan =
+        TextEditingController(text: 'Rp. 2.000.000');
 
     return MaterialApp(
       home: Scaffold(
@@ -43,7 +45,7 @@ class SetALimit extends StatelessWidget {
               width: 200,
               margin: EdgeInsets.only(top: 50, bottom: 10, left: 0),
               padding: EdgeInsets.all(20),
-              child: Image.asset('lib/icons/credit-limit.png'),
+              child: Image.asset('icons/credit-limit.png'),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 60),
@@ -55,13 +57,16 @@ class SetALimit extends StatelessWidget {
                     "Transfer Limits",
                     style: TextStyle(fontSize: 24, color: Color(0xFFD9D9D9)),
                   ),
-                  SizedBox(height: 15,),
-                  TextField(              
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextField(
                     style: TextStyle(fontSize: 20),
                     controller: _limitTransfer,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(12), // Batas maksimum panjang input
+                      LengthLimitingTextInputFormatter(
+                          12), // Batas maksimum panjang input
                       // CurrencyInputFormatter(),
                     ],
                     keyboardType: TextInputType.number,
@@ -70,15 +75,18 @@ class SetALimit extends StatelessWidget {
                       // prefixText: 'Rp ',
                       filled: true,
                       fillColor: Color(0xFFD9D9D9),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),                       
-                    ),            
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    ),
                     onChanged: (value) {
                       _limitTransfer.value = _limitTransfer.value.copyWith(
                         text: formatCurrency(value),
-                        selection: TextSelection.collapsed(offset: formatCurrency(value).length),
+                        selection: TextSelection.collapsed(
+                            offset: formatCurrency(value).length),
                       );
-                    },                           
+                    },
                   ),
                 ],
               ),
@@ -93,13 +101,16 @@ class SetALimit extends StatelessWidget {
                     "Withdrawal Limits",
                     style: TextStyle(fontSize: 24, color: Color(0xFFD9D9D9)),
                   ),
-                  SizedBox(height: 15,),
-                  TextField(              
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TextField(
                     style: TextStyle(fontSize: 20),
                     controller: _limitPenarikan,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(12), // Batas maksimum panjang input
+                      LengthLimitingTextInputFormatter(
+                          12), // Batas maksimum panjang input
                       // CurrencyInputFormatter(),
                     ],
                     keyboardType: TextInputType.number,
@@ -108,21 +119,25 @@ class SetALimit extends StatelessWidget {
                       // prefixText: 'Rp ',
                       filled: true,
                       fillColor: Color(0xFFD9D9D9),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),                       
-                    ),      
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      contentPadding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    ),
                     onChanged: (value) {
                       _limitPenarikan.value = _limitPenarikan.value.copyWith(
                         text: formatCurrency(value),
-                        selection: TextSelection.collapsed(offset: formatCurrency(value).length),
+                        selection: TextSelection.collapsed(
+                            offset: formatCurrency(value).length),
                       );
-                    },    
-
+                    },
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 40,),
+            SizedBox(
+              height: 40,
+            ),
             Row(
               children: [
                 Container(
@@ -134,9 +149,10 @@ class SetALimit extends StatelessWidget {
                     },
                     child: Text(
                       "Save",
-                      style: TextStyle(fontSize: 20,color:Colors.black),
+                      style: TextStyle(fontSize: 20, color: Colors.black),
                     ),
-                    padding: EdgeInsets.only(top: 10, bottom: 10, right: 50, left: 50),
+                    padding: EdgeInsets.only(
+                        top: 10, bottom: 10, right: 50, left: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                         side: BorderSide(width: 1, color: Colors.black)),
@@ -155,21 +171,24 @@ class SetALimit extends StatelessWidget {
                       "Cancel",
                       style: TextStyle(fontSize: 20),
                     ),
-                    padding: EdgeInsets.only(top: 10, bottom: 10, right: 45, left: 45),
+                    padding: EdgeInsets.only(
+                        top: 10, bottom: 10, right: 45, left: 45),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                         side: BorderSide(width: 1, color: Colors.black)),
                   ),
                 )
               ],
-            )            
+            )
           ],
         ),
       ),
     );
   }
-    String formatCurrency(String value) {
-    final numberFormat = NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0);
+
+  String formatCurrency(String value) {
+    final numberFormat =
+        NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0);
     try {
       final intValue = int.parse(value);
       return numberFormat.format(intValue);

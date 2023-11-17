@@ -1,4 +1,4 @@
-import 'package:abank_project/Pages/MyAccount.dart';
+import 'package:abank_project/pages/myaccount/MyAccount.dart';
 import 'package:flutter/material.dart';
 
 void main() {
