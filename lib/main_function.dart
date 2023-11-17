@@ -1,6 +1,6 @@
 import 'package:abank_project/pages/login_page.dart';
 import 'package:flutter/material.dart';
-import 'pages//home_page.dart';
+import 'pages/home_page.dart';
 import 'pages/transfer/transfer_page.dart';
 
 void main() {
@@ -8,6 +8,7 @@ void main() {
     MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          fontFamily: 'Poppins',
           scaffoldBackgroundColor: const Color(0xFF363636),
           textSelectionTheme: const TextSelectionThemeData(
             selectionColor: Colors.grey,
