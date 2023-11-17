@@ -51,6 +51,7 @@ class _TransferPageState extends State<TransferPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF363636),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
@@ -199,9 +200,7 @@ class _TransferPageState extends State<TransferPage> {
               ),
               Expanded(
                 flex: 1,
-                child: Container(
-                  color: Colors.red,
-                ),
+                child: Container(),
               ),
             ]),
       ),

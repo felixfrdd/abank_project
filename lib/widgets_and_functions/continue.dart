@@ -1,4 +1,4 @@
-import 'package:abank_project/pages/home_page.dart';
+import 'package:abank_project/main_function.dart';
 import 'package:flutter/material.dart';
 
 class continueButton extends StatelessWidget {
@@ -13,7 +13,7 @@ class continueButton extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const HomePage(),
+              builder: (context) => const MainFunction(),
             ),
           );
         },
