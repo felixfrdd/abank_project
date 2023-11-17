@@ -68,13 +68,13 @@ class _ChangePinState extends State<ChangePin> {
                 Container(
                   margin: EdgeInsets.only(left: 40),
                   child: MaterialButton(
-                    color: Colors.blue,
+                    color: const Color.fromARGB(255, 70, 172, 254),
                     onPressed: () {
                       // Implementasi logika untuk tombol Save
                     },
                     child: Text(
                       "Save",
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20,color:Colors.black),
                     ),
                     padding: EdgeInsets.only(top: 10, bottom: 10, right: 50, left: 50),
                     shape: RoundedRectangleBorder(
@@ -85,7 +85,7 @@ class _ChangePinState extends State<ChangePin> {
                 Container(
                   margin: EdgeInsets.only(left: 15),
                   child: MaterialButton(
-                    color: Colors.white,
+                    color: Color(0xFFD9D9D9),
                     onPressed: () {
                       // Menghapus teks pada semua TextField
                       _currentPasswordController.clear();

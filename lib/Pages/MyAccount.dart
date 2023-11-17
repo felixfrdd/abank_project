@@ -44,11 +44,11 @@ class MyAccount extends StatelessWidget {
                 GestureDetector(
                   child: Container( 
                     margin: EdgeInsets.only(left: 30,right: 15),
-                    padding: EdgeInsets.all(15),                  
+                    padding: EdgeInsets.all(15),                
                       height:100,
                       width: 100,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: Color(0xFFD9D9D9),
                           borderRadius: BorderRadius.circular(100) 
                           //more than 50% of width makes circle
                       ),
@@ -68,7 +68,7 @@ class MyAccount extends StatelessWidget {
                       height:100,
                       width: 100,
                       decoration: BoxDecoration(
-                        color: Colors.yellow,
+                        color: Color(0xFFD9D9D9),
                           borderRadius: BorderRadius.circular(100) 
                           //more than 50% of width makes circle
                       ),
@@ -87,7 +87,7 @@ class MyAccount extends StatelessWidget {
                       height:100,
                       width: 100,
                       decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: Color(0xFFD9D9D9),
                           borderRadius: BorderRadius.circular(100) 
                       ),
                       child: Image.asset(
@@ -108,19 +108,19 @@ class MyAccount extends StatelessWidget {
                   margin: EdgeInsets.only(left: 40,top:15),
                   child: Text(
                   "Change Pin",
-                  style: TextStyle(fontSize: 15),),
+                  style: TextStyle(fontSize: 15,color: Colors.white),),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 45,top:15),
                   child: Text(
                   "Set a Limit",
-                  style: TextStyle(fontSize: 15),),
+                  style: TextStyle(fontSize: 15, color: Colors.white),),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 43,top:15),
                   child: Text(
                   "View CVV",
-                  style: TextStyle(fontSize: 15),),
+                  style: TextStyle(fontSize: 15,color: Colors.white),),
                 ),
               ],
             )
