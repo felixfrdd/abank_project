@@ -1,3 +1,4 @@
+import 'package:abank_project/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class continueButton extends StatelessWidget {
@@ -9,12 +10,12 @@ class continueButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ElevatedButton(
         onPressed: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => RegistrationPage(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+          );
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(20),
