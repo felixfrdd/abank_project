@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:abank_project/Pages/MyAccount.dart';
+import 'package:abank_project/pages/MyAccount.dart';
 
 class ViewCVV extends StatelessWidget {
   const ViewCVV({Key? key});
