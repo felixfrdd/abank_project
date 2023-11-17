@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   carousel_slider: ^4.0.0
+  firebase_core: ^2.22.0
 
   flutter:
     sdk: flutter
@@ -20,7 +21,19 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - images/50548.png
-  - images/1.png
-  - images/2.png
-  - images/3.png
+    - images/logo.png
+    - images/50548.png
+    - images/1.png
+    - images/2.png
+    - images/3.png
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf
+        - asset: fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: fonts/Poppins-Black.ttf
+          weight: 900
