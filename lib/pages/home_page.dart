@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage> {
         : "132, 312, 341, 512.00";
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF363636),
       body: Column(
         children: [

@@ -1,4 +1,4 @@
-import 'package:abank_project/bottom_navbar.dart';
+import 'package:abank_project/widgets_and_functions/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 class createAcc extends StatelessWidget {

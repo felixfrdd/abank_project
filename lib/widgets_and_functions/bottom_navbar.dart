@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
-import 'pages/transfer/transfer_page.dart';
+import '../pages/home_page.dart';
+import '../pages/transfer/transfer_page.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);

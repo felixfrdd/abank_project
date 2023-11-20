@@ -1,4 +1,4 @@
-import 'package:abank_project/ScreenAwal.dart';
+import 'package:abank_project/pages/initial_screen/ScreenAwal.dart';
 import 'package:flutter/material.dart';
 
 void main() {
