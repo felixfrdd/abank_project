@@ -1,33 +1,15 @@
-import 'package:abank_project/pages/login_page.dart';
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
 import 'pages/transfer/transfer_page.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          fontFamily: 'Poppins',
-          scaffoldBackgroundColor: const Color(0xFF363636),
-          textSelectionTheme: const TextSelectionThemeData(
-            selectionColor: Colors.grey,
-            selectionHandleColor: Color.fromARGB(255, 123, 122, 122),
-            cursorColor: Colors.grey,
-          )),
-      home: LoginPage(),
-    ),
-  );
-}
-
-class MainFunction extends StatefulWidget {
-  const MainFunction({Key? key}) : super(key: key);
+class BottomNavbar extends StatefulWidget {
+  const BottomNavbar({Key? key}) : super(key: key);
 
   @override
-  State<MainFunction> createState() => _MainFunctionState();
+  State<BottomNavbar> createState() => _BottomNavbarState();
 }
 
-class _MainFunctionState extends State<MainFunction> {
+class _BottomNavbarState extends State<BottomNavbar> {
   int _indexBotNav = 0;
   List<Widget> bodies = [];
 
