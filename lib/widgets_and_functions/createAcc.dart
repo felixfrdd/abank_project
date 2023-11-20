@@ -1,4 +1,4 @@
-import 'package:abank_project/main_function.dart';
+import 'package:abank_project/widgets_and_functions/bottom_navbar.dart';
 import 'package:flutter/material.dart';
 
 class createAcc extends StatelessWidget {
@@ -13,7 +13,7 @@ class createAcc extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MainFunction(),
+              builder: (context) => const BottomNavbar(),
             ),
           );
         },
