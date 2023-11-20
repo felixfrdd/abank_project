@@ -1,3 +1,4 @@
+import 'package:abank_project/main_function.dart';
 import 'package:flutter/material.dart';
 
 class createAcc extends StatelessWidget {
@@ -9,12 +10,12 @@ class createAcc extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ElevatedButton(
         onPressed: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => RegistrationPage(),
-          //   ),
-          // );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MainFunction(),
+            ),
+          );
         },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.all(20),
