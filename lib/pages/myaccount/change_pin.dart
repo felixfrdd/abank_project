@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:abank_project/pages/myaccount/my_account.dart';
+// import 'package:abank_project/pages/myaccount/my_account.dart';
 import 'package:flutter/services.dart';
 
 class ChangePin extends StatefulWidget {
@@ -28,11 +28,8 @@ class _ChangePinState extends State<ChangePin> {
           leading: BackButton(
             color: Colors.black,
             onPressed: () {
-              Navigator.push(
+              Navigator.pop(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const MyAccount(),
-                ),
               );
             },
           ),

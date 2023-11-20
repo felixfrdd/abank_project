@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:abank_project/pages/myaccount/my_account.dart';
+// import 'package:abank_project/pages/myaccount/my_account.dart';
 
 class ViewCVV extends StatelessWidget {
   const ViewCVV({Key? key});
@@ -18,12 +18,7 @@ class ViewCVV extends StatelessWidget {
           leading: BackButton(
             color: Colors.black,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const MyAccount(),
-                ),
-              );
+              Navigator.pop(context);
             },
           ),
         ),
