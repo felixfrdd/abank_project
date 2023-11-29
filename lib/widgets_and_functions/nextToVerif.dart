@@ -1,8 +1,8 @@
-import 'package:abank_project/widgets_and_functions/bottom_navbar.dart';
+import 'package:abank_project/pages/verif_page.dart';
 import 'package:flutter/material.dart';
 
-class createAcc extends StatelessWidget {
-  const createAcc({super.key});
+class nextToVerif extends StatelessWidget {
+  const nextToVerif({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class createAcc extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const BottomNavbar(),
+              builder: (context) => verif_page(),
             ),
           );
         },
@@ -26,7 +26,7 @@ class createAcc extends StatelessWidget {
           minimumSize: const Size(double.infinity, 0),
         ),
         child: const Text(
-          'Create An Account',
+          'Next',
           style: TextStyle(
             color: Colors.white,
             fontSize: 17,
