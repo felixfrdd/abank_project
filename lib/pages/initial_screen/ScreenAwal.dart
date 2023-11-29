@@ -1,5 +1,5 @@
 import 'package:abank_project/pages/login_page.dart';
-import 'package:abank_project/pages/registration_page.dart';
+import 'package:abank_project/pages/verif_page.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -194,7 +194,7 @@ class _MyCarouselState extends State<MyCarousel> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RegistrationPage(),
+                            builder: (context) => verif_page(),
                           ),
                         );
                       },

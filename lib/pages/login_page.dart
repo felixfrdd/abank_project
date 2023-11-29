@@ -1,7 +1,7 @@
+import 'package:abank_project/pages/verif_page.dart';
 import 'package:flutter/material.dart';
 import 'package:abank_project/widgets_and_functions/continue.dart';
 import 'package:abank_project/widgets_and_functions/textfield.dart';
-import 'package:abank_project/pages/registration_page.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -93,7 +93,7 @@ class LoginPage extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => RegistrationPage(),
+                            builder: (context) => verif_page(),
                           ),
                         );
                       },
