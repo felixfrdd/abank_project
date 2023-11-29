@@ -1,7 +1,14 @@
 import 'package:abank_project/pages/initial_screen/ScreenAwal.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+Future <void> main() async{
+  await Supabase.initialize(
+    url: 'https://rrppzilkstebmxvxcfor.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJycHB6aWxrc3RlYm14dnhjZm9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEwNjg0MDYsImV4cCI6MjAxNjY0NDQwNn0.v3ODAKrRrQm8nosDYp_EHieoMeOTc7Royafrj2Fh3vU',
+    
+  );
+
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -17,3 +24,5 @@ void main() {
     ),
   );
 }
+
+final supabase = Supabase.instance.client;
