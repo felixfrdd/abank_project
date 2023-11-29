@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../pages/home_page.dart';
+import '../pages/transfer_history/transfer_history.dart';
 import '../pages/transfer/transfer_page.dart';
+import '../pages/scan/scanner.dart';
+import '../pages/myaccount/my_account.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -21,6 +24,9 @@ class _BottomNavbarState extends State<BottomNavbar> {
         setIndex(index);
       }),
       const TransferPage(),
+      Scanner(),
+      TransferHistoryPage(),
+      MyAccount()
     ];
   }
 
