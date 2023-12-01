@@ -8,9 +8,11 @@ environment:
 
 dependencies:
   carousel_slider: ^4.2.1
+  cloud_firestore: ^4.13.3
   feather_icons: ^1.2.0
-  firebase_core: ^2.22.0
-
+  firebase_auth: ^4.15.0
+  firebase_core: ^2.24.0
+  firebase_storage: ^11.5.3
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.3.5
