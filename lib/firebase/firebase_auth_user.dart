@@ -22,8 +22,8 @@ class FirebaseAuthentication {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       return userCredential.user;
-    } on FirebaseAuthException catch (e) {
-      showErrorSnackBar(context, e.message!);
+    } on FirebaseAuthException {
+      showErrorSnackBar(context, 'Incorrect username or password');
     }
     return null;
   }

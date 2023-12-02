@@ -1,7 +1,7 @@
 import 'package:abank_project/firebase/firebase_auth_user.dart';
+import 'package:abank_project/firebase/firestore_user_form.dart';
 import 'package:abank_project/pages/form_login_regist/forgot_password_page.dart';
 import 'package:abank_project/pages/form_login_regist/registration_page.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +15,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _passwordVisible = false;
   final FirebaseAuthentication _auth = FirebaseAuthentication();
+  final FirestoreUserForm _firestoreForm = FirestoreUserForm();
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -29,7 +29,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
     _usernameController.dispose();
-    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -64,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     const Text(
-                      'Please, Login',
+                      'Please Login',
                       style: TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 35,
@@ -81,24 +80,30 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 0, horizontal: 20),
                       child: TextFormField(
-                        controller: _emailController,
+                        controller: _usernameController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (email) {
-                          if (email != null &&
-                              !EmailValidator.validate(email)) {
-                            return 'Please enter a valid email address';
+                        validator: (username) {
+                          RegExp regex = RegExp(r'^[a-zA-Z0-9]+$');
+                          if (username == null || username.isEmpty) {
+                            return 'Username is required';
+                          }
+                          if (!regex.hasMatch(username)) {
+                            return 'Username can only contain letters and numbers';
+                          }
+                          if (username.length < 3 || username.length > 8) {
+                            return 'Username must be between 3 to 8 characters';
                           }
                           return null;
                         },
-                        keyboardType: TextInputType.emailAddress,
+                        keyboardType: TextInputType.name,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
-                            Icons.email_outlined,
+                            Icons.person_outlined,
                             size: 28,
                             color: Colors.black,
                           ),
-                          hintText: 'Email',
+                          hintText: 'Username',
                           filled: true,
                           fillColor: const Color(0xFFD9D9D9),
                           hintStyle: TextStyle(color: Colors.grey[600]),
@@ -121,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Color.fromARGB(255, 56, 56, 56)),
                             borderRadius: BorderRadius.circular(50),
                           ),
+                          errorMaxLines: 2,
                           errorStyle: const TextStyle(fontSize: 15),
                         ),
                       ),
@@ -138,9 +144,12 @@ class _LoginPageState extends State<LoginPage> {
                         autofocus: false,
                         controller: _passwordController,
                         autovalidateMode: AutovalidateMode.onUserInteraction,
-                        validator: (value) {
-                          if (value != null && value.length < 6) {
-                            return 'Minimum 6 characters required';
+                        validator: (password) {
+                          if (password == null || password.isEmpty) {
+                            return 'Password is required';
+                          }
+                          if (password.length < 6) {
+                            return 'Password must be 6 characters or more';
                           }
                           return null;
                         },
@@ -148,8 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: Color(0xFF000000),
                         ),
                         keyboardType: TextInputType.visiblePassword,
-                        obscureText:
-                            !_passwordVisible, //This will obscure text dynamically
+                        obscureText: !_passwordVisible,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.lock_outline,
@@ -179,6 +187,7 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Color.fromARGB(255, 56, 56, 56)),
                             borderRadius: BorderRadius.circular(50),
                           ),
+                          errorMaxLines: 2,
                           errorStyle: const TextStyle(fontSize: 15),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -291,16 +300,16 @@ class _LoginPageState extends State<LoginPage> {
       );
 
   Future _login() async {
-    final isValid = _formKey.currentState!.validate();
-    //TODO: username to Firebase
-    //TODO: username with validator?.
+    final isValidForm = _formKey.currentState!.validate();
     String username = _usernameController.text.trim();
-    String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
+    if (!isValidForm) return;
+    String? email =
+        await _firestoreForm.getEmailFromFirestore(username, context);
+    if (email == null) return;
     User? user =
         await _auth.loginWithEmailAndPassword(email, password, context);
     if (user != null) {
-      if (!isValid) return;
       Navigator.pop(context);
     }
   }

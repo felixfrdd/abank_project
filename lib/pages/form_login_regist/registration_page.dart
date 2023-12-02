@@ -1,4 +1,5 @@
 import 'package:abank_project/firebase/firebase_auth_user.dart';
+import 'package:abank_project/firebase/firestore_user_form.dart';
 import 'package:abank_project/widgets_and_functions/build_back_button.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,6 +15,8 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   bool _passwordVisible = true;
   final FirebaseAuthentication _auth = FirebaseAuthentication();
+  final FirestoreUserForm _firestoreForm = FirestoreUserForm();
+  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -27,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void dispose() {
+    _fullNameController.dispose();
     _usernameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -54,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Image.asset(
                     'images/logo.png',
                     width: 360,
-                    height: 243,
+                    height: 150,
                   ),
 
                   //welcomeback
@@ -72,17 +76,29 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                    child: TextField(
-                      controller: _usernameController,
+                    child: TextFormField(
+                      controller: _fullNameController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (fullName) {
+                        RegExp regex = RegExp(r'^[a-zA-Z ]+$');
+                        if (fullName == null || fullName.isEmpty) {
+                          return 'Full Name is required';
+                        }
+                        if (!regex.hasMatch(fullName)) {
+                          return 'Full Name can only contain letters and spaces';
+                        }
+                        return null;
+                      },
                       keyboardType: TextInputType.name,
                       textInputAction: TextInputAction.next,
                       decoration: InputDecoration(
+                        border: InputBorder.none,
                         prefixIcon: const Icon(
                           Icons.person_outline,
                           size: 28,
                           color: Colors.black,
                         ),
-                        hintText: 'Username',
+                        hintText: 'Full Name',
                         filled: true,
                         fillColor: const Color(0xFFD9D9D9),
                         hintStyle: TextStyle(color: Colors.grey[600]),
@@ -106,6 +122,65 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Color.fromARGB(255, 56, 56, 56)),
                           borderRadius: BorderRadius.circular(50),
                         ),
+                        errorMaxLines: 2,
+                        errorStyle: const TextStyle(fontSize: 15),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 15),
+
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                    child: TextFormField(
+                      controller: _usernameController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (username) {
+                        RegExp regex = RegExp(r'^[a-zA-Z0-9]+$');
+                        if (username == null || username.isEmpty) {
+                          return 'Username is required';
+                        }
+                        if (!regex.hasMatch(username)) {
+                          return 'Username can only contain letters and numbers';
+                        }
+                        if (username.length < 3 || username.length > 8) {
+                          return 'Username must be between 3 to 8 characters';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.name,
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(
+                          Icons.assignment_ind_outlined,
+                          size: 28,
+                          color: Colors.black,
+                        ),
+                        hintText: 'Username',
+                        filled: true,
+                        fillColor: const Color(0xFFD9D9D9),
+                        hintStyle: TextStyle(color: Colors.grey[600]),
+                        contentPadding: const EdgeInsets.all(15.0),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 56, 56, 56)),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        errorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        focusedErrorBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: Color.fromARGB(255, 56, 56, 56)),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        errorMaxLines: 2,
                         errorStyle: const TextStyle(fontSize: 15),
                       ),
                     ),
@@ -158,6 +233,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Color.fromARGB(255, 56, 56, 56)),
                           borderRadius: BorderRadius.circular(50),
                         ),
+                        errorMaxLines: 2,
                         errorStyle: const TextStyle(fontSize: 15),
                       ),
                     ),
@@ -173,8 +249,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: _passwordController,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (password) {
-                        if (password != null && password.length < 6) {
-                          return 'Minimum 6 characters required';
+                        if (password == null || password.isEmpty) {
+                          return 'Password is required';
+                        }
+                        if (password.length < 6) {
+                          return 'Password must be 6 characters or more';
                         }
                         return null;
                       },
@@ -182,8 +261,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Color(0xFF000000),
                       ),
                       keyboardType: TextInputType.visiblePassword,
-                      obscureText:
-                          !_passwordVisible, //This will obscure text dynamically
+                      obscureText: !_passwordVisible,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(
                           Icons.lock_outline,
@@ -195,7 +273,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         fillColor: const Color(0xFFD9D9D9),
                         hintStyle: TextStyle(color: Colors.grey[600]),
                         contentPadding: const EdgeInsets.all(15.0),
-                        isCollapsed: true,
                         enabledBorder: UnderlineInputBorder(
                           borderSide: const BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(50),
@@ -214,6 +291,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: Color.fromARGB(255, 56, 56, 56)),
                           borderRadius: BorderRadius.circular(50),
                         ),
+                        errorMaxLines: 2,
                         errorStyle: const TextStyle(fontSize: 15),
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -268,16 +346,16 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future _register() async {
-    final isValid = _formKey.currentState!.validate();
-
-    //TODO: username to Firebase
+    final isValidForm = _formKey.currentState!.validate();
+    String fullName = _fullNameController.text;
     String username = _usernameController.text.trim();
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
+    if (!isValidForm) return;
     User? user =
         await _auth.registerWithEmailAndPassword(email, password, context);
     if (user != null) {
-      if (!isValid) return;
+      await _firestoreForm.storeUserForm(user, fullName, username, email);
       Navigator.pop(context);
     }
   }
