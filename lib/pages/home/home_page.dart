@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.corporate_fare,
                           size: 60,
                         ),
                         Text("Bill")
@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.atm,
                           size: 60,
                         ),
                         Text("Top Up")
@@ -228,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.wallet_giftcard,
                           size: 60,
                         ),
                         Text("E-Money")
@@ -248,7 +248,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.add_chart,
                           size: 60,
                         ),
                         Text("Invest")
