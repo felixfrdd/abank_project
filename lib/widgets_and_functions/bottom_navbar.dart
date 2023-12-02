@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../pages/home/home_page.dart';
 import '../pages/transfer_history/transfer_history.dart';
@@ -6,7 +7,7 @@ import '../pages/scan/scanner.dart';
 import '../pages/myaccount/my_account.dart';
 
 class BottomNavbar extends StatefulWidget {
-  const BottomNavbar({Key? key}) : super(key: key);
+  const BottomNavbar({super.key});
 
   @override
   State<BottomNavbar> createState() => _BottomNavbarState();
@@ -15,6 +16,7 @@ class BottomNavbar extends StatefulWidget {
 class _BottomNavbarState extends State<BottomNavbar> {
   int _indexBotNav = 0;
   List<Widget> bodies = [];
+  final user = FirebaseAuth.instance.currentUser!;
 
   @override
   void initState() {
@@ -25,8 +27,8 @@ class _BottomNavbarState extends State<BottomNavbar> {
       }),
       const TransferPage(),
       Scanner(),
-      TransferHistoryPage(),
-      MyAccount()
+      const TransferHistoryPage(),
+      const MyAccount()
     ];
   }
 
