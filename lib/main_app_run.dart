@@ -24,9 +24,8 @@ Future main() async {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               //TODO: uncomment return VerificationPage buat aktifin email verification
-
-              // return const VerificationPage();
-              return const BottomNavbar();
+              return const VerificationPage();
+              // return const BottomNavbar();
             } else {
               return const MyCarousel();
             }

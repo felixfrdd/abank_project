@@ -38,9 +38,11 @@ class _VerificationPageState extends State<VerificationPage> {
 
   Future checkEmailVerified() async {
     await FirebaseAuth.instance.currentUser!.reload();
-    setState(() {
-      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-    });
+    if (mounted) {
+      setState(() {
+        isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+      });
+    }
     if (isEmailVerified) {
       timer?.cancel();
     }
@@ -50,15 +52,19 @@ class _VerificationPageState extends State<VerificationPage> {
     try {
       final user = FirebaseAuth.instance.currentUser!;
       await user.sendEmailVerification();
-      setState(
-        () => canResendLink = false,
-      );
+      if (mounted) {
+        setState(
+          () => canResendLink = false,
+        );
+      }
       await Future.delayed(
         const Duration(seconds: 5),
       );
-      setState(
-        () => canResendLink = true,
-      );
+      if (mounted) {
+        setState(
+          () => canResendLink = true,
+        );
+      }
     } on FirebaseAuthException catch (e) {
       showErrorSnackBar(context, e.message!);
     }
@@ -71,6 +77,7 @@ class _VerificationPageState extends State<VerificationPage> {
           backgroundColor: const Color(0xFF363636),
           body: SafeArea(
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Center(
                 child: Column(
                   children: [
