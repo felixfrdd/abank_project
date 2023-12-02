@@ -1,3 +1,4 @@
+import 'package:abank_project/Pages/gabForgotPin.dart';
 import 'package:flutter/material.dart';
 import 'package:abank_project/Pages/MyAccount.dart';
 import 'package:flutter/services.dart';
@@ -62,7 +63,33 @@ class _ChangePinState extends State<ChangePin> {
               controller: _confirmPasswordController,
               labelText: "Confirm Pin",
             ),
-            SizedBox(height: 20,),
+
+            SizedBox(height: 10,),            
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal:47.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(
+                          builder: (context){
+                            return gabForgotPin();
+                          },),);
+                    },
+                    child: Text('Forgot Pin?',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 10,),
             Row(
               children: [
                 Container(
