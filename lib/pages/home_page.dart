@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:abank_project/pages/home_menu/bill.dart';
 
 class HomePage extends StatefulWidget {
   final Function(int) onIndexChanged;
@@ -164,7 +165,8 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => BillScreen()));},
                 child: Container(
                     width: 100,
                     height: 100,
