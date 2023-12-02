@@ -18,12 +18,6 @@ dependencies:
     sdk: flutter
   flutter_native_splash: ^2.3.5
   intl: ^0.18.1
-<<<<<<< HEAD
-  supabase_flutter: ^1.10.25
-  
-=======
-
->>>>>>> 09db7623c834b69193f0bcfc91feffff75b0d386
 flutter_native_splash:
   color: '363636'
 

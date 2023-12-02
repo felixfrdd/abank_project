@@ -4,21 +4,10 @@ import 'package:abank_project/widgets_and_functions/bottom_navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
-Future <void> main() async{
-  await Supabase.initialize(
-    url: 'https://rrppzilkstebmxvxcfor.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJycHB6aWxrc3RlYm14dnhjZm9yIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDEwNjg0MDYsImV4cCI6MjAxNjY0NDQwNn0.v3ODAKrRrQm8nosDYp_EHieoMeOTc7Royafrj2Fh3vU',
-    
-  );
-
-<<<<<<< HEAD
-=======
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
->>>>>>> 09db7623c834b69193f0bcfc91feffff75b0d386
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -45,5 +34,3 @@ Future main() async {
     ),
   );
 }
-
-final supabase = Supabase.instance.client;

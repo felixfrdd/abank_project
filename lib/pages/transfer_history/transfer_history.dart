@@ -24,10 +24,13 @@ class TransferItemContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.only(top: 15),
-        child:
-            Card(color: const Color(0xFFd9d9d9), elevation: 0, child: child));
+    return SafeArea(
+      child: Container(
+          height: 120,
+          padding: const EdgeInsets.only(right: 10, left: 10, bottom: 5, top: 5),
+          child:
+              Card(color: const Color(0xFFd9d9d9), elevation: 0, child: child)),
+    );
   }
 }
 
@@ -48,45 +51,50 @@ class TransferItem extends StatelessWidget {
     return TransferItemContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             date,
             style: const TextStyle(fontSize: 14, color: Colors.black),
           ),
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 18,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Rp',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color.fromARGB(255, 103, 220, 57),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               Text(
-                currency,
+                name,
                 style: const TextStyle(
                   fontSize: 18,
-                  color: Color.fromARGB(255, 103, 220, 57),
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Text(
-                ',00',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color.fromARGB(255, 103, 220, 57),
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  const Text(
+                    'Rp',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 103, 220, 57),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    currency,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 103, 220, 57),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Text(
+                    ',00',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 103, 220, 57),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -140,8 +148,8 @@ class _TransferHistoryPageState extends State<TransferHistoryPage> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               'Transfer History',
@@ -173,7 +181,6 @@ class _TransferHistoryPageState extends State<TransferHistoryPage> {
                 ),
               ),
             ),
-            Expanded(flex: 1, child: Container())
           ],
         ),
       ),
