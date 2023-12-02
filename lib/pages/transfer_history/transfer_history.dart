@@ -26,7 +26,7 @@ class TransferItemContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-          height: 120,
+          height: 100,
           padding: const EdgeInsets.only(right: 10, left: 10, bottom: 5, top: 5),
           child:
               Card(color: const Color(0xFFd9d9d9), elevation: 0, child: child)),
