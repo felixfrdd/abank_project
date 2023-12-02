@@ -34,6 +34,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 const SizedBox(height: 50),
@@ -98,6 +99,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             color: Color.fromARGB(255, 56, 56, 56)),
                         borderRadius: BorderRadius.circular(50),
                       ),
+                      errorMaxLines: 2,
                       errorStyle: const TextStyle(fontSize: 15),
                     ),
                   ),
@@ -140,7 +142,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: email.trim());
       if (!isValid) return;
-      showNeutralSnackBar(context, 'Link sent');
+      showNeutralSnackBar(context, 'Link sent, check your email!');
     } on FirebaseAuthException catch (e) {
       showErrorSnackBar(context, e.message!);
     }
