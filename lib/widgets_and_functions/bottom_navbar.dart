@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../pages/home_page.dart';
+import '../pages/home/home_page.dart';
 import '../pages/transfer_history/transfer_history.dart';
 import '../pages/transfer/transfer_page.dart';
 import '../pages/scan/scanner.dart';
