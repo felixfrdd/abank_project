@@ -8,20 +8,27 @@ environment:
 
 dependencies:
   carousel_slider: ^4.2.1
+  cloud_firestore: ^4.13.3
+  email_validator: ^2.1.17
   feather_icons: ^1.2.0
-  firebase_core: ^2.22.0
-
+  firebase_auth: ^4.15.0
+  firebase_core: ^2.24.0
+  firebase_storage: ^11.5.3
   flutter:
     sdk: flutter
   flutter_native_splash: ^2.3.5
   intl: ^0.18.1
+<<<<<<< HEAD
   supabase_flutter: ^1.10.25
   
+=======
+
+>>>>>>> 09db7623c834b69193f0bcfc91feffff75b0d386
 flutter_native_splash:
-  color: "363636"
+  color: '363636'
 
   android_12:
-    color: "363636"
+    color: '363636'
 
 dev_dependencies:
   flutter_test:
@@ -40,10 +47,11 @@ flutter:
     - images/1.png
     - images/2.png
     - images/3.png
+    - images/
 
   fonts:
     - family: Poppins
-      fonts: 
+      fonts:
         - asset: fonts/Poppins-Regular.ttf
         - asset: fonts/Poppins-Regular.ttf
         - asset: fonts/Poppins-SemiBold.ttf
