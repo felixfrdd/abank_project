@@ -1,6 +1,5 @@
-import 'package:abank_project/Pages/gabForgotPin.dart';
 import 'package:flutter/material.dart';
-import 'package:abank_project/Pages/MyAccount.dart';
+import 'package:abank_project/pages/myaccount/my_account.dart';
 import 'package:flutter/services.dart';
 
 class ChangePin extends StatefulWidget {
@@ -19,11 +18,11 @@ class _ChangePinState extends State<ChangePin> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xFF363636),        
+        backgroundColor: const Color(0xFF363636),
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Change Pin"),
+          title: const Text("Change Pin"),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           leading: BackButton(
@@ -32,7 +31,7 @@ class _ChangePinState extends State<ChangePin> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyAccount(),
+                  builder: (context) => const MyAccount(),
                 ),
               );
             },
@@ -42,91 +41,74 @@ class _ChangePinState extends State<ChangePin> {
           children: [
             Container(
               decoration: BoxDecoration(
-                  color: Color(0xFFD9D9D9), borderRadius: BorderRadius.circular(15)),
+                  color: const Color(0xFFD9D9D9),
+                  borderRadius: BorderRadius.circular(15)),
               height: 150,
               width: 200,
-              margin: EdgeInsets.only(top: 50, bottom: 45),
-              padding: EdgeInsets.all(20),
-              child: Image.asset('lib/icons/lock.png'),
+              margin: const EdgeInsets.only(top: 50, bottom: 45),
+              padding: const EdgeInsets.all(20),
+              child: Image.asset('icons/lock.png'),
             ),
             buildTextField(
               controller: _currentPasswordController,
               labelText: "Current Pin",
             ),
-            SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             buildTextField(
               controller: _newPasswordController,
               labelText: "New Pin",
             ),
-            SizedBox(height: 20,),
+            const SizedBox(
+              height: 20,
+            ),
             buildTextField(
               controller: _confirmPasswordController,
               labelText: "Confirm Pin",
             ),
-
-            SizedBox(height: 10,),            
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal:47.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                        context, 
-                        MaterialPageRoute(
-                          builder: (context){
-                            return gabForgotPin();
-                          },),);
-                    },
-                    child: Text('Forgot Pin?',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
+            const SizedBox(
+              height: 20,
             ),
-
-            SizedBox(height: 10,),
             Row(
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 40),
+                  margin: const EdgeInsets.only(left: 40),
                   child: MaterialButton(
                     color: const Color.fromARGB(255, 70, 172, 254),
                     onPressed: () {
                       // Implementasi logika untuk tombol Save
                     },
-                    child: Text(
-                      "Save",
-                      style: TextStyle(fontSize: 20,color:Colors.black),
-                    ),
-                    padding: EdgeInsets.only(top: 10, bottom: 10, right: 50, left: 50),
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, right: 50, left: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(width: 1, color: Colors.black)),
+                        side: const BorderSide(width: 1, color: Colors.black)),
+                    child: const Text(
+                      "Save",
+                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 15),
+                  margin: const EdgeInsets.only(left: 15),
                   child: MaterialButton(
-                    color: Color(0xFFD9D9D9),
+                    color: const Color(0xFFD9D9D9),
                     onPressed: () {
                       // Menghapus teks pada semua TextField
                       _currentPasswordController.clear();
                       _newPasswordController.clear();
                       _confirmPasswordController.clear();
                     },
-                    child: Text(
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, right: 45, left: 45),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: const BorderSide(width: 1, color: Colors.black)),
+                    child: const Text(
                       "Cancel",
                       style: TextStyle(fontSize: 20),
                     ),
-                    padding: EdgeInsets.only(top: 10, bottom: 10, right: 45, left: 45),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(width: 1, color: Colors.black)),
                   ),
                 )
               ],
@@ -137,22 +119,24 @@ class _ChangePinState extends State<ChangePin> {
     );
   }
 
-  Widget buildTextField({required TextEditingController controller, required String labelText}) {
+  Widget buildTextField(
+      {required TextEditingController controller, required String labelText}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
         controller: controller,
-        style: TextStyle(fontSize: 25),
+        style: const TextStyle(fontSize: 25),
         decoration: InputDecoration(
           filled: true,
-          fillColor: Color(0xFFD9D9D9),
+          fillColor: const Color(0xFFD9D9D9),
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-          contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           labelText: labelText,
         ),
         obscureText: true,
         keyboardType: TextInputType.number,
-        inputFormatters:[
+        inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
           LengthLimitingTextInputFormatter(6),
         ],

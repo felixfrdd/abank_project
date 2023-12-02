@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:abank_project/Pages/MyAccount.dart';
+import 'package:abank_project/pages/myaccount/my_account.dart';
 
 class ViewCVV extends StatelessWidget {
   const ViewCVV({Key? key});
@@ -8,11 +8,11 @@ class ViewCVV extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xFF363636),
+        backgroundColor: const Color(0xFF363636),
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          title: Text("View CVV"),
+          title: const Text("View CVV"),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           leading: BackButton(
@@ -21,7 +21,7 @@ class ViewCVV extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyAccount(),
+                  builder: (context) => const MyAccount(),
                 ),
               );
             },
@@ -30,16 +30,16 @@ class ViewCVV extends StatelessWidget {
         body: Align(
           alignment: Alignment.topCenter,
           child: Container(
-            margin: EdgeInsets.only(top: 90),
+            margin: const EdgeInsets.only(top: 90),
             child: Column(
               children: [
                 Container(
                   height: 180,
                   width: 230,
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Color(0xFFD9D9D9),
+                      color: const Color(0xFFD9D9D9),
                       borderRadius: BorderRadius.circular(15),
                     ),
                     child: Center(
@@ -47,7 +47,7 @@ class ViewCVV extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'lib/icons/cvv.png',
+                            'icons/cvv.png',
                             height: 140,
                             width: 140,
                             color: Colors.black,
@@ -58,26 +58,26 @@ class ViewCVV extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(15),
-                  child: Text(
+                  padding: const EdgeInsets.all(15),
+                  child: const Text(
                     'CVV',
                     style: TextStyle(
-                      color: const Color.fromARGB(255, 255, 255, 255),
+                      color: Color.fromARGB(255, 255, 255, 255),
                       fontSize: 30,
                     ),
                   ),
                 ),
-                  Container(
-                  padding: EdgeInsets.all(10),
-                  color: Color(0xFFD9D9D9),
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  color: const Color(0xFFD9D9D9),
                   height: 60,
                   width: 300,
-                  child: Text(
-                    '167', textAlign: TextAlign.center,
+                  child: const Text(
+                    '167',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,
-                      
                     ),
                   ),
                 ),

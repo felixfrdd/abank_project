@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:abank_project/Pages/MyAccount.dart';
+import 'package:abank_project/pages/myaccount/my_account.dart';
 import 'package:intl/intl.dart';
 
 class SetALimit extends StatelessWidget {
@@ -8,16 +8,18 @@ class SetALimit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _limitTransfer = TextEditingController(text: 'Rp. 5.000.000');
-    TextEditingController _limitPenarikan = TextEditingController(text: 'Rp. 2.000.000');
+    TextEditingController _limitTransfer =
+        TextEditingController(text: 'Rp. 5.000.000');
+    TextEditingController _limitPenarikan =
+        TextEditingController(text: 'Rp. 2.000.000');
 
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xFF363636),
+        backgroundColor: const Color(0xFF363636),
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Set A Limit"),
+          title: const Text("Set A Limit"),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
           leading: BackButton(
@@ -26,7 +28,7 @@ class SetALimit extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyAccount(),
+                  builder: (context) => const MyAccount(),
                 ),
               );
             },
@@ -36,32 +38,35 @@ class SetALimit extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFFD9D9D9),
+                color: const Color(0xFFD9D9D9),
                 borderRadius: BorderRadius.circular(15),
               ),
               height: 150,
               width: 200,
-              margin: EdgeInsets.only(top: 50, bottom: 10, left: 0),
-              padding: EdgeInsets.all(20),
-              child: Image.asset('lib/icons/credit-limit.png'),
+              margin: const EdgeInsets.only(top: 50, bottom: 10, left: 0),
+              padding: const EdgeInsets.all(20),
+              child: Image.asset('icons/credit-limit.png'),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 60),
-              margin: EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 60),
+              margin: const EdgeInsets.only(top: 20),
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Transfer Limits",
                     style: TextStyle(fontSize: 24, color: Color(0xFFD9D9D9)),
                   ),
-                  SizedBox(height: 15,),
-                  TextField(              
-                    style: TextStyle(fontSize: 20),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextField(
+                    style: const TextStyle(fontSize: 20),
                     controller: _limitTransfer,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(12), // Batas maksimum panjang input
+                      LengthLimitingTextInputFormatter(
+                          12), // Batas maksimum panjang input
                       // CurrencyInputFormatter(),
                     ],
                     keyboardType: TextInputType.number,
@@ -69,37 +74,43 @@ class SetALimit extends StatelessWidget {
                       // hintText: '5000000',
                       // prefixText: 'Rp ',
                       filled: true,
-                      fillColor: Color(0xFFD9D9D9),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),                       
-                    ),            
+                      fillColor: const Color(0xFFD9D9D9),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 20),
+                    ),
                     onChanged: (value) {
                       _limitTransfer.value = _limitTransfer.value.copyWith(
                         text: formatCurrency(value),
-                        selection: TextSelection.collapsed(offset: formatCurrency(value).length),
+                        selection: TextSelection.collapsed(
+                            offset: formatCurrency(value).length),
                       );
-                    },                           
+                    },
                   ),
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 60),
-              margin: EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.symmetric(horizontal: 60),
+              margin: const EdgeInsets.only(top: 30),
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Withdrawal Limits",
                     style: TextStyle(fontSize: 24, color: Color(0xFFD9D9D9)),
                   ),
-                  SizedBox(height: 15,),
-                  TextField(              
-                    style: TextStyle(fontSize: 20),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextField(
+                    style: const TextStyle(fontSize: 20),
                     controller: _limitPenarikan,
                     inputFormatters: [
                       FilteringTextInputFormatter.digitsOnly,
-                      LengthLimitingTextInputFormatter(12), // Batas maksimum panjang input
+                      LengthLimitingTextInputFormatter(
+                          12), // Batas maksimum panjang input
                       // CurrencyInputFormatter(),
                     ],
                     keyboardType: TextInputType.number,
@@ -107,69 +118,77 @@ class SetALimit extends StatelessWidget {
                       // hintText: '2000000',
                       // prefixText: 'Rp ',
                       filled: true,
-                      fillColor: Color(0xFFD9D9D9),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-                      contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),                       
-                    ),      
+                      fillColor: const Color(0xFFD9D9D9),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 20),
+                    ),
                     onChanged: (value) {
                       _limitPenarikan.value = _limitPenarikan.value.copyWith(
                         text: formatCurrency(value),
-                        selection: TextSelection.collapsed(offset: formatCurrency(value).length),
+                        selection: TextSelection.collapsed(
+                            offset: formatCurrency(value).length),
                       );
-                    },    
-
+                    },
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 40,),
+            const SizedBox(
+              height: 40,
+            ),
             Row(
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 40),
+                  margin: const EdgeInsets.only(left: 40),
                   child: MaterialButton(
                     color: const Color.fromARGB(255, 70, 172, 254),
                     onPressed: () {
                       // Implementasi logika untuk tombol Save
                     },
-                    child: Text(
-                      "Save",
-                      style: TextStyle(fontSize: 20,color:Colors.black),
-                    ),
-                    padding: EdgeInsets.only(top: 10, bottom: 10, right: 50, left: 50),
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, right: 50, left: 50),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(width: 1, color: Colors.black)),
+                        side: const BorderSide(width: 1, color: Colors.black)),
+                    child: const Text(
+                      "Save",
+                      style: TextStyle(fontSize: 20, color: Colors.black),
+                    ),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(left: 15),
+                  margin: const EdgeInsets.only(left: 15),
                   child: MaterialButton(
-                    color: Color(0xFFD9D9D9),
+                    color: const Color(0xFFD9D9D9),
                     onPressed: () {
                       // Menghapus teks pada semua TextField
                       _limitPenarikan.text = 'Rp. 2.000.000';
                       _limitTransfer.text = 'Rp. 5.000.000';
                     },
-                    child: Text(
+                    padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, right: 45, left: 45),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: const BorderSide(width: 1, color: Colors.black)),
+                    child: const Text(
                       "Cancel",
                       style: TextStyle(fontSize: 20),
                     ),
-                    padding: EdgeInsets.only(top: 10, bottom: 10, right: 45, left: 45),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(width: 1, color: Colors.black)),
                   ),
                 )
               ],
-            )            
+            )
           ],
         ),
       ),
     );
   }
-    String formatCurrency(String value) {
-    final numberFormat = NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0);
+
+  String formatCurrency(String value) {
+    final numberFormat =
+        NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0);
     try {
       final intValue = int.parse(value);
       return numberFormat.format(intValue);
