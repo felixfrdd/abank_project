@@ -34,6 +34,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 const SizedBox(height: 50),

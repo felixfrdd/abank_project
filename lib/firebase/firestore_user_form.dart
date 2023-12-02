@@ -8,12 +8,7 @@ class FirestoreUserForm {
 
   Future storeUserForm(
       User user, String fullName, String username, String email) async {
-    await _firestoreForm
-        .collection('users')
-        .doc(email)
-        .collection('info')
-        .doc('form')
-        .set({
+    await _firestoreForm.collection('user_form').doc(email).set({
       'uid': user.uid,
       'fullName': fullName,
       'username': username,
@@ -23,7 +18,7 @@ class FirestoreUserForm {
 
   Future getEmailFromFirestore(String username, BuildContext context) async {
     QuerySnapshot query = await _firestoreForm
-        .collection('users')
+        .collection('user_form')
         .where('username', isEqualTo: username)
         .get();
     if (query.docs.isNotEmpty) {
