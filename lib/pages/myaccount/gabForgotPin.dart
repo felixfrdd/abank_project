@@ -8,6 +8,7 @@ class gabForgotPin extends StatefulWidget {
 }
 
 class _gabForgotPinState extends State<gabForgotPin> {
+  final _gabChangePinController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +30,7 @@ class _gabForgotPinState extends State<gabForgotPin> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25),
             child:TextField(
+              controller: _gabChangePinController,
               decoration: InputDecoration(
                enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
@@ -48,6 +50,21 @@ class _gabForgotPinState extends State<gabForgotPin> {
             )
           ),          
 
+            SizedBox(height: 15,),
+            MaterialButton(
+              onPressed: (){
+
+              },
+              child: Text("Reset Pin",
+              style: TextStyle(fontSize: 20,color:Colors.black),
+              ),
+              color:const Color.fromARGB(255, 70, 172, 254),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+                side: BorderSide(width: 1,color: Colors.black)
+              ),
+              padding: EdgeInsets.only(top: 10,bottom: 10,right: 35,left: 35),
+            )
         ],     
       ),
     );
