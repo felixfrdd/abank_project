@@ -41,7 +41,7 @@ class _TopUpPageState extends State<TopUpPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Top up'),
+        title: const Text('Top up'),
         leading: buildBackButton(context),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -137,7 +137,7 @@ class _TopUpPageState extends State<TopUpPage> {
                     _firestoreNewAcc.topUpBalance(
                         FirebaseAuth.instance.currentUser!.email!,
                         int.parse(amount));
-
+                    showNeutralSnackBar(context, 'Top up success');
                     _amountController.clear();
                     _focusNode.unfocus();
                   },

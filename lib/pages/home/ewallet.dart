@@ -53,13 +53,13 @@ class ewalletScreen extends StatelessWidget {
               ),
               title: Text(
                 ewallet[index]['name'],
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black87,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Icons.arrow_forward,
                 color: Colors.blue,
               ),

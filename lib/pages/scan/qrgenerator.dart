@@ -3,7 +3,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:abank_project/firebase/firestore_user_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class QRGenerator extends StatefulWidget {
   QRGenerator({super.key});
 
@@ -29,8 +28,8 @@ class _QRGeneratorState extends State<QRGenerator> {
     });
   }
 
-    @override
-      void dispose() {
+  @override
+  void dispose() {
     super.dispose();
   }
 
@@ -102,7 +101,7 @@ class _QRGeneratorState extends State<QRGenerator> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                        padding: EdgeInsets.only(bottom: 15),
+                        padding: const EdgeInsets.only(bottom: 15),
                         child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -124,12 +123,15 @@ class _QRGeneratorState extends State<QRGenerator> {
             Expanded(
                 flex: 1,
                 child: Container(
-                  margin: EdgeInsets.only(left: 25, right: 25,bottom: 35),
-                  padding: EdgeInsets.only(left: 10,right: 10,),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 1, color: Colors.white)
+                  margin:
+                      const EdgeInsets.only(left: 25, right: 25, bottom: 35),
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                    right: 10,
                   ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(width: 1, color: Colors.white)),
                   child: const Center(
                       child: Text(
                     "Perlihatkan QRIS dengan jelas kepada kamera",

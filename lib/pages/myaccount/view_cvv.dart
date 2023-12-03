@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // import 'package:abank_project/pages/myaccount/my_account.dart';
 
 class ViewCVV extends StatefulWidget {
-  
   ViewCVV({Key? key});
 
   @override
@@ -14,26 +13,24 @@ class ViewCVV extends StatefulWidget {
 class _ViewCVVState extends State<ViewCVV> {
   final FirebaseFirestore gabFireCollection = FirebaseFirestore.instance;
   String cvvText1 = "";
-  Future<void>takeCVV() async{
-    String cvvText =  await gabGenerateCVV();
+  Future<void> takeCVV() async {
+    String cvvText = await gabGenerateCVV();
     setState(() {
       cvvText1 = cvvText;
-      
     });
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     takeCVV();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        
         backgroundColor: const Color(0xFF363636),
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -96,7 +93,7 @@ class _ViewCVVState extends State<ViewCVV> {
                   child: Text(
                     cvvText1,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 30,
                     ),
@@ -110,10 +107,15 @@ class _ViewCVVState extends State<ViewCVV> {
     );
   }
 
-    Future gabGenerateCVV() async{
+  Future gabGenerateCVV() async {
     String insertMail = FirebaseAuth.instance.currentUser!.email!;
-    final gabDocUser = FirebaseFirestore.instance.collection('user_form').doc(insertMail.toString());
-    QuerySnapshot cekCVV = await gabFireCollection.collection('user_form').where('email',isEqualTo: insertMail.toString() ).get();
+    final gabDocUser = FirebaseFirestore.instance
+        .collection('user_form')
+        .doc(insertMail.toString());
+    QuerySnapshot cekCVV = await gabFireCollection
+        .collection('user_form')
+        .where('email', isEqualTo: insertMail.toString())
+        .get();
 
     String ambilCVV = cekCVV.docs[0]['CVV'];
     return ambilCVV;

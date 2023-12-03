@@ -222,7 +222,7 @@ class _HomePageState extends State<HomePage> {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => TopUpPage()));
+                      builder: (BuildContext context) => const TopUpPage()));
                 },
                 child: Container(
                     width: 100,
@@ -239,37 +239,6 @@ class _HomePageState extends State<HomePage> {
                           size: 60,
                         ),
                         Text("Top Up")
-                      ],
-                    )),
-              ),
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 25),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => ewalletScreen()));
-                },
-                child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD9D9D9),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.wallet_giftcard,
-                          size: 60,
-                        ),
-                        Text("E-Money")
                       ],
                     )),
               ),
@@ -304,16 +273,39 @@ class _HomePageState extends State<HomePage> {
                       ],
                     )),
               ),
-              const SizedBox(
-                width: 100,
-                height: 100,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => ewalletScreen()));
+                },
+                child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFD9D9D9),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.wallet_giftcard,
+                          size: 60,
+                        ),
+                        Text("E-Money")
+                    
+                      ],
+                    )),
+                  
               ),
-              const SizedBox(
-                width: 100,
-                height: 100,
-              ),
+
+              const SizedBox(width: 100, height: 100,)
             ],
-          )
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 25),
+          ),
+
         ],
       ),
     );

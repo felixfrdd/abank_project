@@ -419,7 +419,7 @@ class _RegisterPageState extends State<RegisterPage> {
       }
       await _firestoreForm.storeUserForm(
           user, fullName, username, email, pin, accNum);
-      await Future.delayed(Duration(milliseconds: 1000));
+      await Future.delayed(const Duration(milliseconds: 1000));
       Navigator.pop(context);
     }
   }

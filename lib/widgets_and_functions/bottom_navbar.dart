@@ -50,10 +50,10 @@ class _BottomNavbarState extends State<BottomNavbar> {
             builder: (context) => const QRScanner(),
           ));
         },
-        child: Icon(Icons.qr_code_scanner, color: Colors.black, size: 30),
+        child: const Icon(Icons.qr_code_scanner, color: Colors.black, size: 30),
       ),
       bottomNavigationBar: NavigationBar(
-        indicatorColor: Color(0xFFD9D9D9),
+        indicatorColor: const Color(0xFFD9D9D9),
         backgroundColor: Colors.white,
         height: 70,
         selectedIndex: _indexBotNav,
