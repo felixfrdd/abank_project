@@ -1,6 +1,7 @@
 import 'package:abank_project/firebase/firestore_user_form.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:abank_project/pages/home/ewallet.dart';
 import 'package:abank_project/pages/home/bill.dart';
 import 'package:abank_project/pages/home/invest.dart';
 import 'package:intl/intl.dart';
@@ -246,7 +247,10 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => ewalletScreen()));
+                },
                 child: Container(
                     width: 100,
                     height: 100,
