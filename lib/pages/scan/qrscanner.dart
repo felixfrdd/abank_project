@@ -194,7 +194,7 @@ class _QRScannerState extends State<QRScanner> {
                                         await Navigator.of(context)
                                             .push(MaterialPageRoute(
                                           builder: (context) =>
-                                              const QRGenerator(),
+                                              QRGenerator(),
                                         ));
 
                                         controller!.resumeCamera();

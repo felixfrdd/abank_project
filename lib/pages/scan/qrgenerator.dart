@@ -1,14 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:abank_project/firebase/firestore_user_form.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class QRGenerator extends StatelessWidget {
-  const QRGenerator({super.key});
+
+class QRGenerator extends StatefulWidget {
+  QRGenerator({super.key});
 
   @override
+  State<QRGenerator> createState() => _QRGeneratorState();
+}
+
+class _QRGeneratorState extends State<QRGenerator> {
+  final FirestoreUserForm _firestoreForm = FirestoreUserForm();
+  String accNumField = '';
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    String accNum = await _firestoreForm.getAccNumFromFirestoreWithEmail(
+        FirebaseAuth.instance.currentUser!.email!);
+    setState(() {
+      accNumField = accNum;
+    });
+  }
+
+    @override
+      void dispose() {
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("Show QR"),
+            title: const Text("Show QR"),
             centerTitle: true,
             backgroundColor: const Color(0xFF363636)),
         body: SafeArea(
@@ -46,11 +75,11 @@ class QRGenerator extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               border:
                                   Border.all(color: Colors.white, width: 1)),
-                          child: const Column(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "Sumber Dana",
                                 style: TextStyle(
                                     color: Colors.white,
@@ -58,8 +87,8 @@ class QRGenerator extends StatelessWidget {
                                     fontSize: 16),
                               ),
                               Text(
-                                "085695467500",
-                                style: TextStyle(color: Colors.white),
+                                accNumField,
+                                style: const TextStyle(color: Colors.white),
                               )
                             ],
                           ),
@@ -78,14 +107,14 @@ class QRGenerator extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Tunjukan QRIS ini kepada kasir",
+                              "Tunjukan QRIS",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 20),
                             ),
                           ],
                         )),
                     QrImageView(
-                      data: '085695467500',
+                      data: accNumField,
                       version: QrVersions.auto,
                       size: 250,
                       backgroundColor: Colors.white,
