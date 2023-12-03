@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "160001534672",
+    "firebase_url": "https://mobilebankingabank-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mobilebankingabank",
+    "storage_bucket": "mobilebankingabank.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:160001534672:android:570efef0ce00f10eda0cd5",
+        "android_client_info": {
+          "package_name": "com.example.abank_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4kXV4Gl018ROwjab2qafcnz3ASixB32Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

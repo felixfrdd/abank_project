@@ -12,11 +12,11 @@ class _gabForgotPinState extends State<gabForgotPin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF363636),        
+      backgroundColor: const Color(0xFF363636),        
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
           centerTitle: true,
-          title: Text("Forgot Pin"),
+          title: const Text("Forgot Pin"),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
       ),
@@ -24,22 +24,22 @@ class _gabForgotPinState extends State<gabForgotPin> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,   
         children: [
-          Text("Enter Your Email",style: TextStyle(fontSize: 20,color: Colors.white),),
+          const Text("Enter Your Email",style: TextStyle(fontSize: 20,color: Colors.white),),
           
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 25),
             child:TextField(
               controller: _gabChangePinController,
               decoration: InputDecoration(
                enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: const BorderSide(color: Colors.white),
                 borderRadius: BorderRadius.circular(12),
                ),
 
                focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(color: Colors.black)
+                borderSide: const  BorderSide(color: Colors.black)
                ),
 
                hintText: "Email",
@@ -50,20 +50,20 @@ class _gabForgotPinState extends State<gabForgotPin> {
             )
           ),          
 
-            SizedBox(height: 15,),
+            const SizedBox(height: 15,),
             MaterialButton(
               onPressed: (){
 
               },
-              child: Text("Reset Pin",
+              child: const Text("Reset Pin",
               style: TextStyle(fontSize: 20,color:Colors.black),
               ),
               color:const Color.fromARGB(255, 70, 172, 254),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20),
-                side: BorderSide(width: 1,color: Colors.black)
+                side: const BorderSide(width: 1,color: Colors.black)
               ),
-              padding: EdgeInsets.only(top: 10,bottom: 10,right: 35,left: 35),
+              padding: const EdgeInsets.only(top: 10,bottom: 10,right: 35,left: 35),
             )
         ],     
       ),

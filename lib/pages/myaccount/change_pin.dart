@@ -1,7 +1,10 @@
 import 'package:abank_project/pages/myaccount/gabForgotPin.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:abank_project/pages/myaccount/my_account.dart';
 import 'package:flutter/services.dart';
+// import 'package:firebase_core/firebase_core.dart';
+
 
 class ChangePin extends StatefulWidget {
   const ChangePin({super.key});
@@ -11,9 +14,9 @@ class ChangePin extends StatefulWidget {
 }
 
 class _ChangePinState extends State<ChangePin> {
-  TextEditingController _currentPasswordController = TextEditingController();
-  TextEditingController _newPasswordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _currentPasswordController = TextEditingController();
+  final TextEditingController _newPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,7 @@ class _ChangePinState extends State<ChangePin> {
               labelText: "Confirm Pin",
             ),
 
-            SizedBox(height: 10,),            
+            const SizedBox(height: 10,),            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal:47.0),
               child: Row(
@@ -81,10 +84,10 @@ class _ChangePinState extends State<ChangePin> {
                         context, 
                         MaterialPageRoute(
                           builder: (context){
-                            return gabForgotPin();
+                            return const gabForgotPin();
                           },),);
                     },
-                    child: Text('Forgot Pin?',
+                    child: const Text('Forgot Pin?',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold),
@@ -104,7 +107,9 @@ class _ChangePinState extends State<ChangePin> {
                   child: MaterialButton(
                     color: const Color.fromARGB(255, 70, 172, 254),
                     onPressed: () {
-                      // Implementasi logika untuk tombol Save
+                      final confirmPin = _confirmPasswordController.text;
+
+                      gabCreateUser(pin: int.parse(confirmPin));
                     },
                     padding: const EdgeInsets.only(
                         top: 10, bottom: 10, right: 50, left: 50),
@@ -143,7 +148,21 @@ class _ChangePinState extends State<ChangePin> {
           ],
         ),
       ),
+      
+
     );
+
+  }
+
+  Future gabCreateUser({required int pin}) async{
+    final gabDocUser = FirebaseFirestore.instance.collection('Pin').doc('gabfirstTest');
+  
+    final json = {
+      'Email' : "gabfirstTest@gmail.com",
+      'Pin' : pin,
+    };
+  
+    await gabDocUser.set(json);
   }
 
   Widget buildTextField(
@@ -171,3 +190,4 @@ class _ChangePinState extends State<ChangePin> {
     );
   }
 }
+
