@@ -132,14 +132,15 @@ class _TransferPageState extends State<TransferPage> {
                           _runFilter('');
                         },
                       ),
-                      contentPadding: const EdgeInsets.all(10.0),
+                      contentPadding: const EdgeInsets.all(10),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 56, 56, 56)),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                     ),
                   )

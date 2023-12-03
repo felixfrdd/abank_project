@@ -13,7 +13,6 @@ class _NewAccountPageState extends State<NewAccountPage> {
   final _newAccountController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   @override
   void dispose() {
     _newAccountController.dispose();
@@ -74,16 +73,16 @@ class _NewAccountPageState extends State<NewAccountPage> {
                       isCollapsed: true,
                       enabledBorder: UnderlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                             color: Color.fromARGB(255, 56, 56, 56)),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -100,6 +99,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
                         },
                       ),
                       errorStyle: const TextStyle(fontSize: 15),
+                      errorMaxLines: 2,
                     ),
                   ),
                 ),
@@ -124,21 +124,7 @@ class _NewAccountPageState extends State<NewAccountPage> {
                         context, 'Added', 'Account added to Account List');
                     _newAccountController.clear();
                     _focusNode.unfocus();
-                    // setState(() {
-                    //   enteredText = '';
-                    // });
                   },
-                  // onPressed: enteredText.length >= 10
-                  //     ? () {
-                  //         _showDialog(
-                  //             context, 'Added', 'Account added to Account List');
-                  //         _textEditingController.clear();
-                  //         _focusNode.unfocus();
-                  //         setState(() {
-                  //           enteredText = '';
-                  //         });
-                  //       }
-                  //     : null,
                   child: const Text('Confirm'),
                 ),
               ),

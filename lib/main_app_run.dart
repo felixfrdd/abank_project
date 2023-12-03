@@ -1,6 +1,5 @@
 import 'package:abank_project/pages/initial_screen/ScreenAwal.dart';
 import 'package:abank_project/pages/form_login_regist/verification_page.dart';
-import 'package:abank_project/widgets_and_functions/bottom_navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:abank_project/firebase/firestore_user_form.dart';
+import 'package:abank_project/pages/form_login_regist/registration_welcome_page.dart';
 import 'package:abank_project/widgets_and_functions/bottom_navbar.dart';
 import 'package:abank_project/widgets_and_functions/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +17,7 @@ class _VerificationPageState extends State<VerificationPage> {
   bool isEmailVerified = false;
   bool canResendLink = false;
   Timer? timer;
+  final FirestoreUserForm _firestoreForm = FirestoreUserForm();
 
   @override
   void initState() {
@@ -22,7 +25,6 @@ class _VerificationPageState extends State<VerificationPage> {
     isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
     if (!isEmailVerified) {
       sendVerificationEmail();
-
       timer = Timer.periodic(
         const Duration(seconds: 3),
         (_) => checkEmailVerified(),
