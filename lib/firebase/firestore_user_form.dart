@@ -7,7 +7,7 @@ class FirestoreUserForm {
   final FirebaseFirestore _firestoreForm = FirebaseFirestore.instance;
 
   Future storeUserForm(User user, String fullName, String username,
-      String email, String pin, String accNum) async {
+      String email, int pin, String accNum) async {
     await _firestoreForm.collection('user_form').doc(email).set({
       'uid': user.uid,
       'fullName': fullName,
