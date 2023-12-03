@@ -1,3 +1,5 @@
+import 'package:abank_project/firebase/firestore_user_form.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:abank_project/pages/home/ewallet.dart';
 import 'package:abank_project/pages/home/bill.dart';
@@ -16,16 +18,43 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isCardNumberVisible = true;
   bool isBalanceVisible = true;
-  String accountName = "Adrian Muhalim";
+  final FirestoreUserForm _firestoreForm = FirestoreUserForm();
+  String fullNameField = '';
+  String accNumField = '';
+  num balanceField = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    String accNum = await _firestoreForm.getAccNumFromFirestoreWithEmail(
+        FirebaseAuth.instance.currentUser!.email!);
+    num balance = await _firestoreForm
+        .getBalance(FirebaseAuth.instance.currentUser!.email!);
+    String fullName = await _firestoreForm
+        .getFullName(FirebaseAuth.instance.currentUser!.email!);
+    setState(() {
+      accNumField = accNum;
+      balanceField = balance;
+      fullNameField = fullName;
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    String cardNumber = isCardNumberVisible
-        ? "* * * * * * * * * * * * * * * *"
-        : "1234 1234 1234 1234";
+    String cardNumber =
+        isCardNumberVisible ? "* * * * * * * * * * * * * * * *" : accNumField;
     String showbalance = isBalanceVisible
         ? "* * * * * * * * * * * * * * * *"
-        : formatPrice(132312413512.00);
+        : balanceField.toString();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -44,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "Welcome Back,",
+                          "Welcome",
                           style: TextStyle(
                             fontSize: 35,
                             color: Colors.white,
@@ -54,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.only(top: 5),
                         ),
                         Text(
-                          accountName,
+                          fullNameField,
                           style: const TextStyle(
                               fontSize: 30,
                               color: Colors.white,
@@ -167,8 +196,10 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               GestureDetector(
-                onTap: () {Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => BillScreen()));},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => BillScreen()));
+                },
                 child: Container(
                     width: 100,
                     height: 100,
@@ -216,8 +247,10 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                onTap: () {Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => ewalletScreen()));},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => ewalletScreen()));
+                },
                 child: Container(
                     width: 100,
                     height: 100,
@@ -239,7 +272,7 @@ class _HomePageState extends State<HomePage> {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => Invest()));
+                      builder: (BuildContext context) => Invest()));
                 },
                 child: Container(
                     width: 100,
@@ -269,7 +302,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-    String formatPrice(double value) {
+
+  String formatPrice(double value) {
     final formatter = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
     return formatter.format(value);
   }
