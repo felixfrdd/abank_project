@@ -1,7 +1,9 @@
+import 'package:abank_project/firebase/firestore_user_form.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreUserNewBankAccount {
   final FirebaseFirestore _firestoreForm = FirebaseFirestore.instance;
+  final FirestoreUserForm _firestoreUserForm = FirestoreUserForm();
 
   Future<bool> isAvailableNewAccNum(String email, String accNum) async {
     QuerySnapshot query = await _firestoreForm
@@ -95,5 +97,50 @@ class FirestoreUserNewBankAccount {
       }
     }
     return resultList;
+  }
+
+  Future<void> calculateBalanceForSender(String email, num balance) async {
+    QuerySnapshot query = await _firestoreForm
+        .collection('user_form')
+        .where('email', isEqualTo: email)
+        .get();
+    if (query.docs.isNotEmpty) {
+      num bal = query.docs[0]['balance'];
+      bal = bal - balance;
+      await _firestoreForm.collection('user_form').doc(email).update({
+        'balance': bal,
+      });
+    }
+  }
+
+  Future<void> calculateBalanceForReceiver(String accNum, num balance) async {
+    QuerySnapshot query = await _firestoreForm
+        .collection('user_form')
+        .where('accNum', isEqualTo: accNum)
+        .get();
+    if (query.docs.isNotEmpty) {
+      num bal = query.docs[0]['balance'];
+      bal = bal + balance;
+      await _firestoreForm
+          .collection('user_form')
+          .doc(await _firestoreUserForm.getEmailUsingAccNumber(accNum))
+          .update({
+        'balance': bal,
+      });
+    }
+  }
+
+  Future<void> topUpBalance(String email, num balance) async {
+    QuerySnapshot query = await _firestoreForm
+        .collection('user_form')
+        .where('email', isEqualTo: email)
+        .get();
+    if (query.docs.isNotEmpty) {
+      num bal = query.docs[0]['balance'];
+      bal = bal + balance;
+      await _firestoreForm.collection('user_form').doc(email).update({
+        'balance': bal,
+      });
+    }
   }
 }

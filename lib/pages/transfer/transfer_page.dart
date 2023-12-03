@@ -1,4 +1,4 @@
-import 'package:abank_project/firebase/firestore_user_new_bank_account.dart';
+import 'package:abank_project/firebase/firestore_user_bank_account.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'transfer_account_page.dart';
@@ -206,11 +206,14 @@ class _TransferPageState extends State<TransferPage> {
                                 String customerName = _foundCustomer[index]
                                         ["fullName"]
                                     .toString();
+                                String accNum =
+                                    _foundCustomer[index]["accNum"].toString();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => TransferAccountPage(
-                                          allCustomer: _allCustomer),
+                                          customerName: customerName,
+                                          accNum: accNum),
                                     ));
                               },
                             ),

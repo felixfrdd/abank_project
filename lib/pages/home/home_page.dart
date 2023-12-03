@@ -1,4 +1,5 @@
 import 'package:abank_project/firebase/firestore_user_form.dart';
+import 'package:abank_project/pages/home/topup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:abank_project/pages/home/ewallet.dart';
@@ -219,7 +220,10 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => TopUpPage()));
+                },
                 child: Container(
                     width: 100,
                     height: 100,
