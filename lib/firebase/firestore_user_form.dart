@@ -1,3 +1,4 @@
+import 'package:abank_project/widgets_and_functions/cvvGenerate_random.dart';
 import 'package:abank_project/widgets_and_functions/snackbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class FirestoreUserForm {
   final FirebaseFirestore _firestoreForm = FirebaseFirestore.instance;
+  final RandomCVV _cvvGenerator = RandomCVV();
 
   Future storeUserForm(User user, String fullName, String username,
       String email, int pin, String accNum) async {
@@ -15,6 +17,7 @@ class FirestoreUserForm {
       'email': email,
       'pin': pin,
       'accNum': accNum,
+      'CVV': _cvvGenerator.generateCVV(),
       'registered': false,
       'balance': 1000000
     });
@@ -48,6 +51,17 @@ class FirestoreUserForm {
       return email;
     } else {
       showErrorSnackBar(context, 'Incorrect username or password');
+    }
+  }
+
+  Future getEmailUsingAccNumber(String accNum) async {
+    QuerySnapshot query = await _firestoreForm
+        .collection('user_form')
+        .where('accNum', isEqualTo: accNum)
+        .get();
+    if (query.docs.isNotEmpty) {
+      String email = query.docs[0]['email'];
+      return email;
     }
   }
 
