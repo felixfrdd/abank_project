@@ -1,13 +1,39 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:abank_project/pages/myaccount/my_account.dart';
 
-class ViewCVV extends StatelessWidget {
-  const ViewCVV({Key? key});
+class ViewCVV extends StatefulWidget {
+  
+  ViewCVV({Key? key});
 
+  @override
+  State<ViewCVV> createState() => _ViewCVVState();
+}
+
+class _ViewCVVState extends State<ViewCVV> {
+  final FirebaseFirestore gabFireCollection = FirebaseFirestore.instance;
+  String cvvText1 = "";
+  Future<void>takeCVV() async{
+    String cvvText =  await gabGenerateCVV();
+    setState(() {
+      cvvText1 = cvvText;
+      
+    });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    takeCVV();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        
         backgroundColor: const Color(0xFF363636),
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -67,8 +93,8 @@ class ViewCVV extends StatelessWidget {
                   color: const Color(0xFFD9D9D9),
                   height: 60,
                   width: 300,
-                  child: const Text(
-                    '167',
+                  child: Text(
+                    cvvText1,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
@@ -82,5 +108,14 @@ class ViewCVV extends StatelessWidget {
         ),
       ),
     );
+  }
+
+    Future gabGenerateCVV() async{
+    String insertMail = FirebaseAuth.instance.currentUser!.email!;
+    final gabDocUser = FirebaseFirestore.instance.collection('user_form').doc(insertMail.toString());
+    QuerySnapshot cekCVV = await gabFireCollection.collection('user_form').where('email',isEqualTo: insertMail.toString() ).get();
+
+    String ambilCVV = cekCVV.docs[0]['CVV'];
+    return ambilCVV;
   }
 }

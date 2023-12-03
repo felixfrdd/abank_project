@@ -55,7 +55,8 @@ class _HomePageState extends State<HomePage> {
         isCardNumberVisible ? "* * * * * * * * * * * * * * * *" : accNumField;
     String showbalance = isBalanceVisible
         ? "* * * * * * * * * * * * * * * *"
-        : balanceField.toString();
+        : formatPrice(balanceField);
+    // : balanceField.toString();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -121,7 +122,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const Padding(padding: EdgeInsets.only(left: 10)),
                         InkWell(
-                          //Function tunjukin uang
                           onTap: () {
                             setState(() {
                               isBalanceVisible = !isBalanceVisible;
@@ -273,6 +273,14 @@ class _HomePageState extends State<HomePage> {
                       ],
                     )),
               ),
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 25),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -300,6 +308,10 @@ class _HomePageState extends State<HomePage> {
                 width: 100,
                 height: 100,
               ),
+              const SizedBox(
+                width: 100,
+                height: 100,
+              ),
             ],
           )
         ],
@@ -307,7 +319,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  String formatPrice(double value) {
+  String formatPrice(num value) {
     final formatter = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
     return formatter.format(value);
   }
