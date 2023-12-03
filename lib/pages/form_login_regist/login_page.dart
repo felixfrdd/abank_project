@@ -44,18 +44,14 @@ class _LoginPageState extends State<LoginPage> {
             child: Center(
               child: Column(
                 children: [
-                  //logo
                   Image.asset(
                     'images/logo.png',
                     width: 360,
                     height: 243,
                   ),
-
                   const SizedBox(
                     height: 10,
                   ),
-
-                  //welcomeback
                   const Text(
                     'Welcome',
                     style: TextStyle(
@@ -71,12 +67,9 @@ class _LoginPageState extends State<LoginPage> {
                       color: Colors.white,
                     ),
                   ),
-
                   const SizedBox(
                     height: 25,
                   ),
-
-                  //username
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -132,12 +125,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 20,
                   ),
-
-                  //password
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -207,12 +197,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 20,
                   ),
-
-                  //continue
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: ElevatedButton(
@@ -235,11 +222,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 10,
                   ),
-
                   GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -259,11 +244,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 5,
                   ),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -312,6 +295,7 @@ class _LoginPageState extends State<LoginPage> {
     User? user =
         await _auth.loginWithEmailAndPassword(email, password, context);
     if (user != null) {
+      await Future.delayed(Duration(milliseconds: 1000));
       Navigator.pop(context);
     }
   }
