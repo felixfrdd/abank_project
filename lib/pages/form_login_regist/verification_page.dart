@@ -78,8 +78,6 @@ class _VerificationPageState extends State<VerificationPage> {
         FirebaseAuth.instance.currentUser!.email!,
       ),
       builder: (context, snapshot) {
-        bool isUserRegistered = snapshot.data ?? false;
-        print(snapshot.data);
         if (snapshot.data == true && isEmailVerified) {
           return const BottomNavbar();
         } else if (snapshot.data == false && isEmailVerified) {
