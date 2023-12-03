@@ -1,3 +1,5 @@
+import 'package:abank_project/firebase/firestore_user_new_bank_account.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'transfer_account_page.dart';
 import 'new_account_page.dart';
@@ -10,23 +12,32 @@ class TransferPage extends StatefulWidget {
 }
 
 class _TransferPageState extends State<TransferPage> {
-  final List<Map<String, String>> _allCustomer = [
-    {'name': 'Andri', 'acc': '0927831945'},
-    {'name': 'Doni', 'acc': '027398432'},
-    {'name': 'Cherry', 'acc': '0867923412'},
-    {'name': 'Bonny', 'acc': '0683452379'},
-    {'name': 'Rani', 'acc': '0673321278'},
-    {'name': 'Robin', 'acc': '0345328120'},
-  ];
+  List<Map<String, String>> _allCustomer = [];
   List<Map<String, String>> _foundCustomer = [];
-  final _textEditingController = TextEditingController();
+  final _accountListSearch = TextEditingController();
+  final FirestoreUserNewBankAccount _firestoreUserNewBankAccount =
+      FirestoreUserNewBankAccount();
 
   @override
-  initState() {
-    _allCustomer
-        .sort((a, b) => a["name"].toString().compareTo(b["name"].toString()));
-    _foundCustomer = _allCustomer;
+  void initState() {
     super.initState();
+    fetchData();
+    _allCustomer.sort(
+        (a, b) => a["fullName"].toString().compareTo(b["fullName"].toString()));
+    _foundCustomer = List<Map<String, String>>.from(_allCustomer);
+  }
+
+  Future<void> fetchData() async {
+    List<Map<String, String>> userData = await _firestoreUserNewBankAccount
+        .getAddedAccount(FirebaseAuth.instance.currentUser!.email!);
+    setState(() {
+      _allCustomer = userData;
+      _allCustomer.sort((a, b) => a["fullName"]
+          .toString()
+          .toLowerCase()
+          .compareTo(b["fullName"].toString().toLowerCase()));
+      _foundCustomer = List<Map<String, String>>.from(_allCustomer);
+    });
   }
 
   void _runFilter(String enteredKeyword) {
@@ -36,16 +47,22 @@ class _TransferPageState extends State<TransferPage> {
     } else {
       results = _allCustomer
           .where((customer) =>
-              customer['name']
+              customer['fullName']
                   .toString()
                   .toLowerCase()
                   .contains(enteredKeyword.toLowerCase().toString()) ||
-              customer['acc'].toString().contains(enteredKeyword.toString()))
+              customer['accNum'].toString().contains(enteredKeyword.toString()))
           .toList();
     }
     setState(() {
       _foundCustomer = results;
     });
+  }
+
+  @override
+  void dispose() {
+    _accountListSearch.dispose();
+    super.dispose();
   }
 
   @override
@@ -86,10 +103,12 @@ class _TransferPageState extends State<TransferPage> {
                         )),
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const NewAccountPage(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              NewAccountPage(fetchData: fetchData),
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -97,10 +116,11 @@ class _TransferPageState extends State<TransferPage> {
               Container(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(children: [
-                  TextField(
-                    controller: _textEditingController,
+                  TextFormField(
+                    controller: _accountListSearch,
                     onChanged: (value) => _runFilter(value),
                     autofocus: false,
+                    keyboardType: TextInputType.text,
                     style: const TextStyle(
                       fontSize: 22.0,
                       color: Color(0xFF000000),
@@ -109,6 +129,7 @@ class _TransferPageState extends State<TransferPage> {
                       filled: true,
                       fillColor: const Color(0xFFD9D9D9),
                       hintText: 'Search',
+                      isCollapsed: true,
                       prefixIcon: const Icon(
                         Icons.search,
                         size: 30.0,
@@ -120,18 +141,19 @@ class _TransferPageState extends State<TransferPage> {
                         splashColor: Colors.transparent,
                         splashRadius: 20.0,
                         onPressed: () {
-                          _textEditingController.clear();
+                          _accountListSearch.clear();
                           _runFilter('');
                         },
                       ),
-                      contentPadding: const EdgeInsets.all(10.0),
+                      contentPadding: const EdgeInsets.all(10),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 56, 56, 56)),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                     ),
                   )
@@ -167,22 +189,23 @@ class _TransferPageState extends State<TransferPage> {
                             margin: const EdgeInsets.symmetric(vertical: 8.0),
                             child: ListTile(
                               title: Text(
-                                _foundCustomer[index]['name'].toString(),
+                                _foundCustomer[index]['fullName'].toString(),
                                 style: const TextStyle(
                                   color: Color(0xFF000000),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0,
                                 ),
                               ),
-                              subtitle:
-                                  Text(_foundCustomer[index]["acc"].toString(),
-                                      style: const TextStyle(
-                                        color: Color(0xFF000000),
-                                        fontSize: 16.0,
-                                      )),
+                              subtitle: Text(
+                                  _foundCustomer[index]["accNum"].toString(),
+                                  style: const TextStyle(
+                                    color: Color(0xFF000000),
+                                    fontSize: 16.0,
+                                  )),
                               onTap: () {
-                                String customerName =
-                                    _foundCustomer[index]["name"].toString();
+                                String customerName = _foundCustomer[index]
+                                        ["fullName"]
+                                    .toString();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(

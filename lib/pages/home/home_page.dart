@@ -1,4 +1,10 @@
+import 'package:abank_project/firebase/firestore_user_form.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:abank_project/pages/home/ewallet.dart';
+import 'package:abank_project/pages/home/bill.dart';
+import 'package:abank_project/pages/home/invest.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   final Function(int) onIndexChanged;
@@ -12,18 +18,47 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isCardNumberVisible = true;
   bool isBalanceVisible = true;
-  String accountName = "Adrian Muhalim";
+  final FirestoreUserForm _firestoreForm = FirestoreUserForm();
+  String fullNameField = '';
+  String accNumField = '';
+  num balanceField = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    String accNum = await _firestoreForm.getAccNumFromFirestoreWithEmail(
+        FirebaseAuth.instance.currentUser!.email!);
+    num balance = await _firestoreForm
+        .getBalance(FirebaseAuth.instance.currentUser!.email!);
+    String fullName = await _firestoreForm
+        .getFullName(FirebaseAuth.instance.currentUser!.email!);
+    setState(() {
+      accNumField = accNum;
+      balanceField = balance;
+      fullNameField = fullName;
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    String cardNumber = isCardNumberVisible
-        ? "* * * * * * * * * * * * * * * *"
-        : "1234 1234 1234 1234";
+    String cardNumber =
+        isCardNumberVisible ? "* * * * * * * * * * * * * * * *" : accNumField;
     String showbalance = isBalanceVisible
         ? "* * * * * * * * * * * * * * * *"
-        : "132, 312, 341, 512.00";
+        : formatPrice(balanceField);
+    // : balanceField.toString();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF363636),
       body: Column(
         children: [
@@ -39,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "Welcome Back,",
+                          "Welcome",
                           style: TextStyle(
                             fontSize: 35,
                             color: Colors.white,
@@ -49,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.only(top: 5),
                         ),
                         Text(
-                          accountName,
+                          fullNameField,
                           style: const TextStyle(
                               fontSize: 30,
                               color: Colors.white,
@@ -86,7 +121,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const Padding(padding: EdgeInsets.only(left: 10)),
                         InkWell(
-                          //Function tunjukin uang
                           onTap: () {
                             setState(() {
                               isBalanceVisible = !isBalanceVisible;
@@ -117,7 +151,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const Padding(padding: EdgeInsets.only(left: 10)),
                         InkWell(
-                          //Function tunjukin uang
                           onTap: () {
                             setState(() {
                               isCardNumberVisible = !isCardNumberVisible;
@@ -163,7 +196,10 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => BillScreen()));
+                },
                 child: Container(
                     width: 100,
                     height: 100,
@@ -175,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.corporate_fare,
                           size: 60,
                         ),
                         Text("Bill")
@@ -183,7 +219,10 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => ewalletScreen()));
+                },
                 child: Container(
                     width: 100,
                     height: 100,
@@ -195,10 +234,10 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.wallet_giftcard,
                           size: 60,
                         ),
-                        Text("Top Up")
+                        Text("E-Money")
                       ],
                     )),
               ),
@@ -211,7 +250,10 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => Invest()));
+                },
                 child: Container(
                     width: 100,
                     height: 100,
@@ -223,27 +265,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
-                          size: 60,
-                        ),
-                        Text("E-Money")
-                      ],
-                    )),
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD9D9D9),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.swap_horiz,
+                          Icons.add_chart,
                           size: 60,
                         ),
                         Text("Invest")
@@ -254,10 +276,19 @@ class _HomePageState extends State<HomePage> {
                 width: 100,
                 height: 100,
               ),
+              const SizedBox(
+                width: 100,
+                height: 100,
+              ),
             ],
           )
         ],
       ),
     );
+  }
+
+  String formatPrice(num value) {
+    final formatter = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
+    return formatter.format(value);
   }
 }

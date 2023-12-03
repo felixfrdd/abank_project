@@ -27,8 +27,7 @@ class TransferItemContainer extends StatelessWidget {
     return SafeArea(
       child: Container(
           height: 100,
-          padding:
-              const EdgeInsets.only(right: 10, left: 10, bottom: 5, top: 5),
+          padding: const EdgeInsets.only(right: 10, left: 10, bottom: 5, top: 5),
           child:
               Card(color: const Color(0xFFd9d9d9), elevation: 0, child: child)),
     );
@@ -133,7 +132,11 @@ List<TransferHistory> transferHistories = [
   TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
   TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
   TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
-  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000')
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
 ];
 
 class TransferHistoryPage extends StatefulWidget {
@@ -149,8 +152,6 @@ class _TransferHistoryPageState extends State<TransferHistoryPage> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               'Transfer History',
@@ -163,7 +164,7 @@ class _TransferHistoryPageState extends State<TransferHistoryPage> {
               flex: 12,
               child: Container(
                 decoration: BoxDecoration(
-                    color: const Color(0xFF4b4b4b),
+                    color: const const Color(0xFF4b4b4b),
                     borderRadius: BorderRadius.circular(20.0)),
                 width: double.infinity,
                 height: 300,
