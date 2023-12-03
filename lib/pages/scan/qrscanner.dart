@@ -164,11 +164,11 @@ class _QRScannerState extends State<QRScanner> {
                             topRight: Radius.circular(25)),
                       ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
                               padding: const EdgeInsets.only(
-                                  top: 10, left: 20, bottom: 10),
+                                  top: 10, bottom: 10),
                               child: const Text(
                                 "SHOW QR",
                                 style: TextStyle(
@@ -182,7 +182,7 @@ class _QRScannerState extends State<QRScanner> {
                                   flex: 1,
                                   child: Container(
                                     margin: const EdgeInsets.only(
-                                        left: 20, right: 10),
+                                        left: 20, right: 20),
                                     decoration: const BoxDecoration(
                                         color: Color(0xFFD9D9D9),
                                         borderRadius: BorderRadius.all(
@@ -200,26 +200,7 @@ class _QRScannerState extends State<QRScanner> {
                                         controller!.resumeCamera();
                                       },
                                       child: const Text(
-                                        "Bayar",
-                                        style: TextStyle(color: Colors.black),
-                                      ),
-                                    ),
-                                  )),
-                              Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    margin: const EdgeInsets.only(
-                                        left: 10, right: 20),
-                                    decoration: const BoxDecoration(
-                                        color: Color(0xFFD9D9D9),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text(
-                                        "Transfer",
+                                        "Press This to Show",
                                         style: TextStyle(color: Colors.black),
                                       ),
                                     ),
