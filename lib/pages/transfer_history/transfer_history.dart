@@ -1,189 +1,98 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          fontFamily: 'Poppins',
-          scaffoldBackgroundColor: const Color(0xFF363636),
-          textSelectionTheme: const TextSelectionThemeData(
-            selectionColor: Colors.grey,
-            selectionHandleColor: Color.fromARGB(255, 123, 122, 122),
-            cursorColor: Colors.grey,
-          )),
-      home: const TransferHistoryPage(),
-    ),
-  );
-}
+class TransferHistoryPage extends StatelessWidget {
+  List<History> stocksList = [
+    History("Felix", "2023-05-12", -500000),
+    History("Shinzi", "2023-04-24", 900000),
+    History("Gabriel", "2023-04-6", -50000),
+    History("Hanson", "2023-03-17", 76890),
+    History("Jonathan", "2023-03-13", 86000),
+    History("Javier", "2023-01-12", 700000),
+  ];
 
-class TransferItemContainer extends StatelessWidget {
-  final Widget child;
-
-  const TransferItemContainer({super.key, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-          height: 100,
-          padding: const EdgeInsets.only(right: 10, left: 10, bottom: 5, top: 5),
-          child:
-              Card(color: const Color(0xFFd9d9d9), elevation: 0, child: child)),
-    );
-  }
-}
-
-class TransferItem extends StatelessWidget {
-  final String date;
-  final String name;
-  final String currency;
-
-  const TransferItem({
-    super.key,
-    required this.date,
-    required this.name,
-    required this.currency,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TransferItemContainer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            date,
-            style: const TextStyle(fontSize: 14, color: Colors.black),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                name,
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Row(
-                children: [
-                  const Text(
-                    'Rp',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color.fromARGB(255, 103, 220, 57),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    currency,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Color.fromARGB(255, 103, 220, 57),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Text(
-                    ',00',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color.fromARGB(255, 103, 220, 57),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class TransferHistory {
-  final String date;
-  final String name;
-  final String currency;
-
-  TransferHistory({
-    required this.date,
-    required this.name,
-    required this.currency,
-  });
-}
-
-List<TransferHistory> transferHistories = [
-  TransferHistory(
-    date: '2023-11-10',
-    name: 'John Tony',
-    currency: '7.000.000',
-  ),
-  TransferHistory(
-    date: '2023-11-09',
-    name: 'Justin Bibir',
-    currency: '8.000.000',
-  ),
-  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
-  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
-  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
-  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
-  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
-  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000')
-];
-
-class TransferHistoryPage extends StatefulWidget {
-  const TransferHistoryPage({super.key});
-
-  @override
-  State<TransferHistoryPage> createState() => _TransferHistoryPageState();
-}
-
-class _TransferHistoryPageState extends State<TransferHistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Transfer History',
-              style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold),
-            ),
-            Expanded(
-              flex: 12,
-              child: Container(
-                decoration: BoxDecoration(
-                    color: const Color(0xFF4b4b4b),
-                    borderRadius: BorderRadius.circular(20.0)),
-                width: double.infinity,
-                height: 300,
-                child: ListView.builder(
-                  itemCount: transferHistories.length,
-                  itemBuilder: (context, index) {
-                    TransferHistory transfer = transferHistories[index];
-                    return TransferItemContainer(
-                      child: TransferItem(
-                        date: transfer.date,
-                        name: transfer.name,
-                        currency: transfer.currency,
-                      ),
-                    );
-                  },
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          "Transfer",
+          style: TextStyle(fontSize: 20),
+        ),
+        backgroundColor: const Color(0xFF363636),
+      ),
+      body: ListView.builder(
+        itemCount: stocksList.length,
+        itemBuilder: (context, index) {
+          return Row(
+            children: [
+              Expanded(
+                child: Card(
+                  margin: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 80,
+                    padding: const EdgeInsets.only(
+                        top: 4, right: 10, bottom: 4, left: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          stocksList[index].history_date,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              stocksList[index].history_name,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  formatPrice(
+                                      stocksList[index].history_currency),
+                                  style: TextStyle(
+                                    color: getCurrencyColor(
+                                        stocksList[index].history_currency),
+                                    fontSize: 17,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
+            ],
+          );
+        },
       ),
     );
   }
+
+  String formatPrice(double value) {
+    final formatter = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
+    return formatter.format(value);
+  }
+
+  Color getCurrencyColor(double margin) {
+    return margin < 0 ? Colors.red : Colors.green;
+  }
+}
+
+class History {
+  final String history_name;
+  final String history_date;
+  final double history_currency;
+
+  History(this.history_name, this.history_date, this.history_currency);
 }

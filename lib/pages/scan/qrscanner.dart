@@ -76,11 +76,11 @@ class _QRScannerState extends State<QRScanner> {
                           padding: const EdgeInsets.only(right: 25),
                           height: 40,
                           child: TextButton(
-                            onPressed: () async{
+                            onPressed: () async {
                               controller!.pauseCamera();
-                              await Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    const TransferHistoryPage(),
+                              await Navigator.of(context)
+                                  .push(MaterialPageRoute(
+                                builder: (context) => TransferHistoryPage(),
                               ));
                               controller!.resumeCamera();
                             },
@@ -167,8 +167,8 @@ class _QRScannerState extends State<QRScanner> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                              padding: const EdgeInsets.only(
-                                  top: 10, bottom: 10),
+                              padding:
+                                  const EdgeInsets.only(top: 10, bottom: 10),
                               child: const Text(
                                 "SHOW QR",
                                 style: TextStyle(
@@ -193,8 +193,7 @@ class _QRScannerState extends State<QRScanner> {
 
                                         await Navigator.of(context)
                                             .push(MaterialPageRoute(
-                                          builder: (context) =>
-                                              QRGenerator(),
+                                          builder: (context) => QRGenerator(),
                                         ));
 
                                         controller!.resumeCamera();

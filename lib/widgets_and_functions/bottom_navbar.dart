@@ -26,7 +26,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
         setIndex(index);
       }),
       const TransferPage(),
-      const TransferHistoryPage(),
+      TransferHistoryPage(),
       const MyAccount()
     ];
   }
