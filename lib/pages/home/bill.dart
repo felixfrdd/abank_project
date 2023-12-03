@@ -76,7 +76,7 @@ class BillScreen extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context); // Close the dialog
+                Navigator.pop(context);
               },
               child: Text('Cancel'),
             ),
@@ -86,6 +86,7 @@ class BillScreen extends StatelessWidget {
 
                 Navigator.pop(context);
 
+                _showSuccessSnackbar(context);
               },
               child: Text('OK'),
             ),
@@ -94,4 +95,21 @@ class BillScreen extends StatelessWidget {
       },
     );
   }
+
+  void _showSuccessSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(
+        'Payment Successful!',
+        style: TextStyle(fontSize: 16),
+      ),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }
+
+
