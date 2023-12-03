@@ -16,7 +16,7 @@ class BillScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('My Bills'),
+        title: const Text('Bills'),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         leading: BackButton(
@@ -47,7 +47,7 @@ class BillScreen extends StatelessWidget {
                 color: Colors.blue,
               ),
               onTap: () {
-                // aksi saat button diklik, ontoh: Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen(billType: bills[index])));
+                _showVirtualAccountInputDialog(context, bills[index]);
               },
             ),
           );
@@ -55,4 +55,61 @@ class BillScreen extends StatelessWidget {
       ),
     );
   }
+
+  void _showVirtualAccountInputDialog(BuildContext context, String billType) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        TextEditingController virtualAccountController = TextEditingController();
+
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Enter the virtual account number for $billType:'),
+              TextField(
+                controller: virtualAccountController,
+                keyboardType: TextInputType.number,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                String virtualAccount = virtualAccountController.text;
+
+                Navigator.pop(context);
+
+                _showSuccessSnackbar(context);
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSuccessSnackbar(BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(
+        'Payment Successful!',
+        style: TextStyle(fontSize: 16),
+      ),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }
+
+

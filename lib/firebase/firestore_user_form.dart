@@ -18,7 +18,27 @@ class FirestoreUserForm {
       'pin': pin,
       'accNum': accNum,
       'CVV': _cvvGenerator.generateCVV(),
+      'registered': false,
+      'balance': 1000000
     });
+  }
+
+  Future<void> markUserAsRegistered(String email) async {
+    await _firestoreForm.collection('user_form').doc(email).update({
+      'registered': true,
+    });
+  }
+
+  Future<bool> isRegisteredUser(String email) async {
+    DocumentSnapshot userSnapshot =
+        await _firestoreForm.collection('user_form').doc(email).get();
+
+    if (userSnapshot.exists) {
+      bool isRegistered = userSnapshot.get('registered') ?? false;
+      return isRegistered;
+    } else {
+      return false;
+    }
   }
 
   Future getEmailFromFirestore(String username, BuildContext context) async {
@@ -34,13 +54,38 @@ class FirestoreUserForm {
     }
   }
 
+  Future getBalance(String email) async {
+    QuerySnapshot query = await _firestoreForm
+        .collection('user_form')
+        .where('email', isEqualTo: email)
+        .get();
+    if (query.docs.isNotEmpty) {
+      num balance = query.docs[0]['balance'];
+      return balance;
+    }
+  }
+
+  Future getFullName(String email) async {
+    QuerySnapshot query = await _firestoreForm
+        .collection('user_form')
+        .where('email', isEqualTo: email)
+        .get();
+    if (query.docs.isNotEmpty) {
+      String fullName = query.docs[0]['fullName'];
+      return fullName;
+    }
+  }
+
   Future<String> getAccNumFromFirestoreWithEmail(String email) async {
     QuerySnapshot query = await _firestoreForm
         .collection('user_form')
         .where('email', isEqualTo: email)
         .get();
-    String accNum = query.docs[0]['accNum'];
-    return accNum;
+    if (query.docs.isNotEmpty) {
+      String accNum = query.docs[0]['accNum'];
+      return accNum;
+    }
+    return '';
   }
 
   Future<bool> isAvailableUsername(

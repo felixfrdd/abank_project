@@ -108,7 +108,9 @@ class MyAccount extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       )),
-                  onPressed: () => FirebaseAuth.instance.signOut(),
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                  },
                 ),
               ),
             ),

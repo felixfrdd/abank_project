@@ -58,14 +58,11 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Center(
               child: Column(
                 children: [
-                  //logo
                   Image.asset(
                     'images/logo.png',
                     width: 360,
                     height: 80,
                   ),
-
-                  //welcomeback
                   const Text(
                     'Create Account',
                     style: TextStyle(
@@ -74,9 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       color: Colors.white,
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -131,9 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 15),
-
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -189,9 +182,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 15),
-
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -242,9 +233,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 15),
-
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -315,9 +304,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 15),
-
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -377,9 +364,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 20),
-
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
@@ -434,6 +419,7 @@ class _RegisterPageState extends State<RegisterPage> {
       }
       await _firestoreForm.storeUserForm(
           user, fullName, username, email, pin, accNum);
+      await Future.delayed(Duration(milliseconds: 1000));
       Navigator.pop(context);
     }
   }

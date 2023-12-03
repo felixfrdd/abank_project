@@ -19,6 +19,7 @@ dependencies:
   flutter_native_splash: ^2.3.5
   intl: ^0.18.1
   qr_code_scanner: ^1.0.1
+  qr_flutter: ^4.1.0
 flutter_native_splash:
   color: '363636'
   custom_navigation_bar: ^0.8.2
