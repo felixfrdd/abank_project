@@ -35,6 +35,7 @@ flutter:
   uses-material-design: true
   assets:
     - images/Abank (1).png
+    - images/KartuAbank.png
     - icons/lock.png
     - icons/credit-limit.png
     - icons/cvv.png

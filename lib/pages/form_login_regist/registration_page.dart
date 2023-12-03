@@ -418,7 +418,7 @@ class _RegisterPageState extends State<RegisterPage> {
     String username = _usernameController.text.trim();
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
-    String pin = _pinController.text.trim();
+    int pin = int.parse(_pinController.text.trim());
     String accNum = '';
     bool isNotUniqueAccNum = true;
     bool isAvailableUsername =

@@ -4,9 +4,12 @@ import 'package:abank_project/pages/form_login_regist/forgot_password_page.dart'
 import 'package:abank_project/pages/form_login_regist/registration_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:abank_project/pages/myaccount/change_pin.dart';
 
 class LoginPage extends StatefulWidget {
+
   const LoginPage({super.key});
+
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -19,6 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final ChangePin _goToPin = ChangePin();
 
   @override
   void initState() {
@@ -305,6 +309,7 @@ class _LoginPageState extends State<LoginPage> {
     final isValidForm = _formKey.currentState!.validate();
     String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
+    
     if (!isValidForm) return;
     String? email =
         await _firestoreForm.getEmailFromFirestore(username, context);
