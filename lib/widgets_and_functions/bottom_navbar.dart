@@ -26,7 +26,6 @@ class _BottomNavbarState extends State<BottomNavbar> {
         setIndex(index);
       }),
       const TransferPage(),
-      // const QRScanner(),
       const TransferHistoryPage(),
       const MyAccount()
     ];
@@ -73,10 +72,6 @@ class _BottomNavbarState extends State<BottomNavbar> {
             selectedIcon: Icon(Icons.swap_horiz),
             label: "Transfer",
           ),
-          // NavigationDestination(
-          //   icon: Icon(Icons.qr_code_scanner),
-          //   label: "Scan",
-          // ),
           NavigationDestination(
             icon: Icon(Icons.history_outlined),
             selectedIcon: Icon(Icons.history),

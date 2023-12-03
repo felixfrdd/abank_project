@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:flutter/services.dart';
+import 'package:abank_project/pages/scan/qrgenerator.dart';
 
 class QRScanner extends StatefulWidget {
   const QRScanner({Key? key}) : super(key: key);
@@ -75,11 +76,13 @@ class _QRScannerState extends State<QRScanner> {
                           padding: const EdgeInsets.only(right: 25),
                           height: 40,
                           child: TextButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
+                            onPressed: () async{
+                              controller!.pauseCamera();
+                              await Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
                                     const TransferHistoryPage(),
                               ));
+                              controller!.resumeCamera();
                             },
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
@@ -100,60 +103,53 @@ class _QRScannerState extends State<QRScanner> {
                       child: Container(
                         width: 200,
                         margin: const EdgeInsets.only(
-                            right: 100, left: 100, top: 130, bottom: 160),
+                            right: 110, left: 110, top: 130, bottom: 170),
                         padding:
                             const EdgeInsets.only(top: 10, right: 5, left: 5),
                         decoration: const BoxDecoration(
                             color: Color(0xFF363636),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
-                        child: SafeArea(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Barcode Type",
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Barcode Type",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              describeEnum(result!.format),
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10),
+                            ),
+                            const Text("Result",
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                describeEnum(result!.format),
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10),
-                              ),
-                              const Text("Result",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold)),
-                              Text(
-                                "${result!.code}",
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10),
-                              ),
-                              IconButton(
-                                onPressed: () async {
-                                  if (result != null && result!.code != null) {
-                                    await Clipboard.setData(
-                                        ClipboardData(text: "${result!.code}"));
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text('Copied to clipboard')),
-                                    );
-                                  } else {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                          content: Text(
-                                              'Cannot copy null or undefined value')),
-                                    );
-                                  }
-                                  Navigator.pop(context);
-                                },
-                                icon:
-                                    const Icon(Icons.copy, color: Colors.white),
-                              ),
-                            ],
-                          ),
+                                    fontWeight: FontWeight.bold)),
+                            Text(
+                              "${result!.code}",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 10),
+                            ),
+                            IconButton(
+                              onPressed: () async {
+                                if (result != null && result!.code != null) {
+                                  await Clipboard.setData(
+                                      ClipboardData(text: "${result!.code}"));
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            'Cannot copy null or undefined value')),
+                                  );
+                                }
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.copy, color: Colors.white),
+                            ),
+                          ],
                         ),
                       ))
                 else
@@ -192,8 +188,16 @@ class _QRScannerState extends State<QRScanner> {
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10))),
                                     child: TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
+                                      onPressed: () async {
+                                        controller!.pauseCamera();
+
+                                        await Navigator.of(context)
+                                            .push(MaterialPageRoute(
+                                          builder: (context) =>
+                                              const QRGenerator(),
+                                        ));
+
+                                        controller!.resumeCamera();
                                       },
                                       child: const Text(
                                         "Bayar",
@@ -261,6 +265,12 @@ class _QRScannerState extends State<QRScanner> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        if (_isNumeric(result?.code)) {
+          result = scanData;
+          print('Scanned data is a series of numbers: ${result?.code}');
+        } else {
+          result = null;
+        }
       });
     });
     controller.pauseCamera();
@@ -274,6 +284,13 @@ class _QRScannerState extends State<QRScanner> {
         const SnackBar(content: Text('no Permission')),
       );
     }
+  }
+
+  bool _isNumeric(String? input) {
+    if (input == null) {
+      return false;
+    }
+    return double.tryParse(input) != null;
   }
 
   @override
