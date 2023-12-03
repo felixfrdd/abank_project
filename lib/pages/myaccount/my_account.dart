@@ -1,4 +1,5 @@
 import 'package:abank_project/pages/myaccount/set_a_limit.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:abank_project/pages/myaccount/change_pin.dart';
 import 'package:abank_project/pages/myaccount/view_cvv.dart';
@@ -122,7 +123,27 @@ class MyAccount extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 10),
+            Container(
+              alignment: Alignment.topCenter,
+              padding: const EdgeInsets.only(top: 8.0),
+              child: SizedBox(
+                child: TextButton.icon(
+                  icon: const Icon(Icons.logout),
+                  label: const Text('Logout',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20.0)),
+                  style: TextButton.styleFrom(
+                      foregroundColor: const Color(0xFF000000),
+                      backgroundColor: const Color(0xFFD9D9D9),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      )),
+                  onPressed: () => FirebaseAuth.instance.signOut(),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -19,14 +19,20 @@ class _TransferPageState extends State<TransferPage> {
     {'name': 'Robin', 'acc': '0345328120'},
   ];
   List<Map<String, String>> _foundCustomer = [];
-  final _textEditingController = TextEditingController();
+  final _accountListSearch = TextEditingController();
 
   @override
-  initState() {
+  void initState() {
     _allCustomer
         .sort((a, b) => a["name"].toString().compareTo(b["name"].toString()));
     _foundCustomer = _allCustomer;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _accountListSearch.dispose();
+    super.dispose();
   }
 
   void _runFilter(String enteredKeyword) {
@@ -97,10 +103,11 @@ class _TransferPageState extends State<TransferPage> {
               Container(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(children: [
-                  TextField(
-                    controller: _textEditingController,
+                  TextFormField(
+                    controller: _accountListSearch,
                     onChanged: (value) => _runFilter(value),
                     autofocus: false,
+                    keyboardType: TextInputType.text,
                     style: const TextStyle(
                       fontSize: 22.0,
                       color: Color(0xFF000000),
@@ -109,6 +116,7 @@ class _TransferPageState extends State<TransferPage> {
                       filled: true,
                       fillColor: const Color(0xFFD9D9D9),
                       hintText: 'Search',
+                      isCollapsed: true,
                       prefixIcon: const Icon(
                         Icons.search,
                         size: 30.0,
@@ -120,18 +128,19 @@ class _TransferPageState extends State<TransferPage> {
                         splashColor: Colors.transparent,
                         splashRadius: 20.0,
                         onPressed: () {
-                          _textEditingController.clear();
+                          _accountListSearch.clear();
                           _runFilter('');
                         },
                       ),
-                      contentPadding: const EdgeInsets.all(10.0),
+                      contentPadding: const EdgeInsets.all(10),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 56, 56, 56)),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                     ),
                   )

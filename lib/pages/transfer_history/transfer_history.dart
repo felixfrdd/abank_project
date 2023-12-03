@@ -24,9 +24,13 @@ class TransferItemContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.only(top: 15),
-        child: Card(color: Color(0xFFd9d9d9), elevation: 0, child: child));
+    return SafeArea(
+      child: Container(
+          height: 100,
+          padding: const EdgeInsets.only(right: 10, left: 10, bottom: 5, top: 5),
+          child:
+              Card(color: const Color(0xFFd9d9d9), elevation: 0, child: child)),
+    );
   }
 }
 
@@ -47,45 +51,50 @@ class TransferItem extends StatelessWidget {
     return TransferItemContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             date,
             style: const TextStyle(fontSize: 14, color: Colors.black),
           ),
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 18,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Rp',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color.fromARGB(255, 103, 220, 57),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
               Text(
-                currency,
+                name,
                 style: const TextStyle(
                   fontSize: 18,
-                  color: Color.fromARGB(255, 103, 220, 57),
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Text(
-                ',00',
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color.fromARGB(255, 103, 220, 57),
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  const Text(
+                    'Rp',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 103, 220, 57),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    currency,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 103, 220, 57),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Text(
+                    ',00',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 103, 220, 57),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -118,36 +127,12 @@ List<TransferHistory> transferHistories = [
     name: 'Justin Bibir',
     currency: '8.000.000',
   ),
-  TransferHistory(
-    date: '23-21-23',
-    name: 'Testeing',
-    currency: '7.000.000'
-  ),
-  TransferHistory(
-    date: '23-21-23',
-    name: 'Testeing',
-    currency: '7.000.000'
-  ),
-  TransferHistory(
-    date: '23-21-23',
-    name: 'Testeing',
-    currency: '7.000.000'
-  ),TransferHistory(
-    date: '23-21-23',
-    name: 'Testeing',
-    currency: '7.000.000'
-  ),
-  TransferHistory(
-    date: '23-21-23',
-    name: 'Testeing',
-    currency: '7.000.000'
-  ),
-  TransferHistory(
-    date: '23-21-23',
-    name: 'Testeing',
-    currency: '7.000.000'
-  )
-  
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000'),
+  TransferHistory(date: '23-21-23', name: 'Testeing', currency: '7.000.000')
 ];
 
 class TransferHistoryPage extends StatefulWidget {
@@ -161,43 +146,44 @@ class _TransferHistoryPageState extends State<TransferHistoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                'Transfer History',
-                style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              Expanded(
-                flex: 12,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Color(0xFF4b4b4b),
-                      borderRadius: BorderRadius.circular(20.0)),
-                  width: double.infinity,
-                  height: 300,
-                  child: ListView.builder(
-                    itemCount: transferHistories.length,
-                    itemBuilder: (context, index) {
-                      TransferHistory transfer = transferHistories[index];
-                      return TransferItemContainer(
-                        child: TransferItem(
-                          date: transfer.date,
-                          name: transfer.name,
-                          currency: transfer.currency,
-                        ),
-                      );
-                    },
-                  ),
+      body: SafeArea(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Transfer History',
+              style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+            Expanded(
+              flex: 12,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: const Color(0xFF4b4b4b),
+                    borderRadius: BorderRadius.circular(20.0)),
+                width: double.infinity,
+                height: 300,
+                child: ListView.builder(
+                  itemCount: transferHistories.length,
+                  itemBuilder: (context, index) {
+                    TransferHistory transfer = transferHistories[index];
+                    return TransferItemContainer(
+                      child: TransferItem(
+                        date: transfer.date,
+                        name: transfer.name,
+                        currency: transfer.currency,
+                      ),
+                    );
+                  },
                 ),
               ),
-              Expanded(flex: 1, child: Container())
-            ],
-          ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -24,7 +24,7 @@ class _TransferAccountPageState extends State<TransferAccountPage> {
           child: Column(
         children: [
           Container(
-            child: Text(''),
+            child: const Text(''),
           )
         ],
       )),
