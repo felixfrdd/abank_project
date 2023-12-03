@@ -50,14 +50,22 @@ class verif_page extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                   child: TextField(
+                    style: const TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration
+                            .none), // Set warna teks menjadi putih
                     decoration: InputDecoration(
                       hintText: 'Enter your email',
                       hintStyle: TextStyle(color: Colors.grey[600]),
                       enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
-                        // borderRadius: BorderRadius.circular(50),
+                            color:
+                                Colors.white), // Warna underline menjadi putih
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors
+                                .white), // Warna underline saat fokus menjadi putih
                       ),
                     ),
                   ),

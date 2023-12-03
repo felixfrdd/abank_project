@@ -49,14 +49,22 @@ class _make_accState extends State<make_acc> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                   child: TextField(
+                    style: const TextStyle(
+                        color: Colors.white,
+                        decoration: TextDecoration
+                            .none), // Set warna teks menjadi putih
                     decoration: InputDecoration(
                       hintText: 'Username',
                       hintStyle: TextStyle(color: Colors.grey[600]),
                       enabledBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
-                          color: Colors.white,
-                        ),
-                        // borderRadius: BorderRadius.circular(50),
+                            color:
+                                Colors.white), // Warna underline menjadi putih
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors
+                                .white), // Warna underline saat fokus menjadi putih
                       ),
                     ),
                   ),
@@ -68,6 +76,8 @@ class _make_accState extends State<make_acc> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
                   child: TextFormField(
+                    style: const TextStyle(
+                        color: Colors.white, decoration: TextDecoration.none),
                     keyboardType: TextInputType.text,
                     obscureText:
                         !_passwordVisible, //This will obscure text dynamically
@@ -78,7 +88,11 @@ class _make_accState extends State<make_acc> {
                         borderSide: BorderSide(
                           color: Colors.white,
                         ),
-                        // borderRadius: BorderRadius.circular(50),
+                      ),
+                      focusedBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(
+                            color: Colors
+                                .white), // Warna underline saat fokus menjadi putih
                       ),
                       // Here is key idea
                       suffixIcon: IconButton(
