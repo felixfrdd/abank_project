@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 
 class ewalletScreen extends StatelessWidget {
-  final List<String> ewallet = [
-    'DANA',
-    'Gopay',
-    'OVO',
-    'Shopeepay',
+  final List<Map<String, dynamic>> ewallet = [
+    {
+      'name': 'DANA',
+      'image': 'images/dana_logo.png',
+    },
+    {
+      'name': 'Gopay',
+      'image': 'images/gopay_logo.png',
+    },
+    {
+      'name': 'OVO',
+      'image': 'images/ovo_logo.png',
+    },
+    {
+      'name': 'Shopeepay',
+      'image': 'images/shopeepay_logo.png',
+    },
   ];
 
   @override
@@ -27,12 +39,20 @@ class ewalletScreen extends StatelessWidget {
         itemCount: ewallet.length,
         itemBuilder: (context, index) {
           return Card(
-            elevation: 4,
-            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 32),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(64),
+            ),
             child: ListTile(
-              contentPadding: const EdgeInsets.all(16),
+              contentPadding: const EdgeInsets.only(
+                  left: 20, right: 20, top: 17, bottom: 17),
+              leading: Image.asset(
+                ewallet[index]['image'],
+                width: 100,
+                height: 100,
+              ),
               title: Text(
-                ewallet[index],
+                ewallet[index]['name'],
                 style: TextStyle(
                   color: Colors.black87,
                   fontSize: 18,
