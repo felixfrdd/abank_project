@@ -45,8 +45,8 @@ class _MyCarouselState extends State<MyCarousel> {
                             children: [
                               Image.asset(
                                 'images/1.png',
-                                width: 250,
-                                height: 250,
+                                width: 230,
+                                height: 230,
                               ),
                               const SizedBox(height: 0),
                               const Text(
@@ -67,8 +67,8 @@ class _MyCarouselState extends State<MyCarousel> {
                             children: [
                               Image.asset(
                                 'images/2.png',
-                                width: 250,
-                                height: 250,
+                                width: 230,
+                                height: 230,
                               ),
                               const SizedBox(height: 0),
                               const Text(
@@ -89,8 +89,8 @@ class _MyCarouselState extends State<MyCarousel> {
                             children: [
                               Image.asset(
                                 'images/3.png',
-                                width: 230,
-                                height: 230,
+                                width: 200,
+                                height: 200,
                               ),
                               const SizedBox(height: 0),
                               const Text(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:abank_project/pages/home/bill.dart';
-
+import 'package:abank_project/pages/home/ewallet.dart';
 
 class HomePage extends StatefulWidget {
   final Function(int) onIndexChanged;
@@ -216,7 +216,8 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => ewalletScreen()));},
                 child: Container(
                     width: 100,
                     height: 100,
