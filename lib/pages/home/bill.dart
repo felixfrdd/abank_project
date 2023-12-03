@@ -36,13 +36,13 @@ class BillScreen extends StatelessWidget {
               contentPadding: const EdgeInsets.all(16),
               title: Text(
                 bills[index],
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black87,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              trailing: Icon(
+              trailing: const Icon(
                 Icons.arrow_forward,
                 color: Colors.blue,
               ),
@@ -60,7 +60,8 @@ class BillScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        TextEditingController virtualAccountController = TextEditingController();
+        TextEditingController virtualAccountController =
+            TextEditingController();
 
         return AlertDialog(
           content: Column(
@@ -78,7 +79,7 @@ class BillScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             TextButton(
               onPressed: () {
@@ -88,7 +89,7 @@ class BillScreen extends StatelessWidget {
 
                 _showSuccessSnackbar(context);
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -98,7 +99,7 @@ class BillScreen extends StatelessWidget {
 
   void _showSuccessSnackbar(BuildContext context) {
     final snackBar = SnackBar(
-      content: Text(
+      content: const Text(
         'Payment Successful!',
         style: TextStyle(fontSize: 16),
       ),
@@ -111,5 +112,3 @@ class BillScreen extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
-
-

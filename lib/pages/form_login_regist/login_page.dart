@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:abank_project/pages/myaccount/change_pin.dart';
 
 class LoginPage extends StatefulWidget {
-
   const LoginPage({super.key});
-
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -22,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final ChangePin _goToPin = ChangePin();
+  final ChangePin _goToPin = const ChangePin();
 
   @override
   void initState() {
@@ -292,7 +290,7 @@ class _LoginPageState extends State<LoginPage> {
     final isValidForm = _formKey.currentState!.validate();
     String username = _usernameController.text.trim();
     String password = _passwordController.text.trim();
-    
+
     if (!isValidForm) return;
     String? email =
         await _firestoreForm.getEmailFromFirestore(username, context);
@@ -300,7 +298,7 @@ class _LoginPageState extends State<LoginPage> {
     User? user =
         await _auth.loginWithEmailAndPassword(email, password, context);
     if (user != null) {
-      await Future.delayed(Duration(milliseconds: 1000));
+      await Future.delayed(const Duration(milliseconds: 1000));
       Navigator.pop(context);
     }
   }
