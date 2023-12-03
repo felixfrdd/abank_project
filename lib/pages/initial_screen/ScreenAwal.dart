@@ -38,71 +38,62 @@ class _MyCarouselState extends State<MyCarousel> {
                   children: [
                     CarouselSlider(
                       items: [
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 70),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'images/1.png',
-                                width: 230,
-                                height: 230,
-                              ),
-                              const SizedBox(height: 0),
-                              const Text(
-                                'Manage your finances easily and safely with the ABank Mobile Banking Application',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/1.png',
+                              width: 230,
+                              height: 230,
+                            ),
+                            const SizedBox(height: 0),
+                            const Text(
+                              'Manage your finances easily and safely with the ABank Mobile Banking Application',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 70),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'images/2.png',
-                                width: 230,
-                                height: 230,
-                              ),
-                              const SizedBox(height: 0),
-                              const Text(
-                                'Enjoy the convenience of banking services at your fingertips',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/2.png',
+                              width: 230,
+                              height: 230,
+                            ),
+                            const SizedBox(height: 0),
+                            const Text(
+                              'Enjoy the convenience of banking services at your fingertips',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 70),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'images/3.png',
-                                width: 200,
-                                height: 200,
-                              ),
-                              const SizedBox(height: 0),
-                              const Text(
-                                'One step closer to getting your finances in order. Start your journey with our Mobile Banking App',
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/3.png',
+                              width: 200,
+                              height: 200,
+                            ),
+                            const SizedBox(height: 0),
+                            const Text(
+                              'One step closer to getting your finances in order. Start your journey with our Mobile Banking App',
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
                       ],
                       options: CarouselOptions(
