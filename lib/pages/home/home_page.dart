@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'package:abank_project/pages/home/bill.dart';
 import 'package:abank_project/pages/home/ewallet.dart';
+import 'package:abank_project/pages/home/bill.dart';
+import 'package:abank_project/pages/home/invest.dart';
 
 class HomePage extends StatefulWidget {
   final Function(int) onIndexChanged;
@@ -121,7 +121,6 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const Padding(padding: EdgeInsets.only(left: 10)),
                         InkWell(
-                          //Function tunjukin uang
                           onTap: () {
                             setState(() {
                               isCardNumberVisible = !isCardNumberVisible;
@@ -237,7 +236,10 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => Invest()));
+                },
                 child: Container(
                     width: 100,
                     height: 100,
