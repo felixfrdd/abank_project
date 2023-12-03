@@ -54,6 +54,17 @@ class FirestoreUserForm {
     }
   }
 
+  Future getEmailUsingAccNumber(String accNum) async {
+    QuerySnapshot query = await _firestoreForm
+        .collection('user_form')
+        .where('accNum', isEqualTo: accNum)
+        .get();
+    if (query.docs.isNotEmpty) {
+      String email = query.docs[0]['email'];
+      return email;
+    }
+  }
+
   Future getBalance(String email) async {
     QuerySnapshot query = await _firestoreForm
         .collection('user_form')

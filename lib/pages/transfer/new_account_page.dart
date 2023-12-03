@@ -1,4 +1,4 @@
-import 'package:abank_project/firebase/firestore_user_new_bank_account.dart';
+import 'package:abank_project/firebase/firestore_user_bank_account.dart';
 import 'package:abank_project/widgets_and_functions/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
