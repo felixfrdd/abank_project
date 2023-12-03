@@ -16,6 +16,7 @@ class FirestoreUserForm {
       'pin': pin,
       'accNum': accNum,
       'registered': false,
+      'balance': 1000000
     });
   }
 
@@ -47,6 +48,28 @@ class FirestoreUserForm {
       return email;
     } else {
       showErrorSnackBar(context, 'Incorrect username or password');
+    }
+  }
+
+  Future getBalance(String email) async {
+    QuerySnapshot query = await _firestoreForm
+        .collection('user_form')
+        .where('email', isEqualTo: email)
+        .get();
+    if (query.docs.isNotEmpty) {
+      num balance = query.docs[0]['balance'];
+      return balance;
+    }
+  }
+
+  Future getFullName(String email) async {
+    QuerySnapshot query = await _firestoreForm
+        .collection('user_form')
+        .where('email', isEqualTo: email)
+        .get();
+    if (query.docs.isNotEmpty) {
+      String fullName = query.docs[0]['fullName'];
+      return fullName;
     }
   }
 
