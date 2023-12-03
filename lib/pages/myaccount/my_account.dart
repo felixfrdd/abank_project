@@ -20,15 +20,6 @@ class MyAccount extends StatelessWidget {
         ),
         body: Column(
           children: [
-            // Container(
-            //   padding:EdgeInsets.all(15),
-            //   color: Colors.white,
-            //   height: 50,
-            //   width: 370,
-            //   child : Text(
-            //     "Jenis Kartu",
-            //     style: TextStyle(fontSize: 20.0),),
-            // ),
 
             Container(
                 padding: const EdgeInsets.all(30.0),
@@ -38,10 +29,11 @@ class MyAccount extends StatelessWidget {
                         image: AssetImage('images/KartuAbank.png')))),
 
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
               children: [
                 GestureDetector(
                   child: Container(
-                    margin: const EdgeInsets.only(left: 30, right: 15),
                     padding: const EdgeInsets.all(15),
                     height: 100,
                     width: 100,
@@ -74,23 +66,24 @@ class MyAccount extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => const ViewCVV()));
+                        builder: (BuildContext context) =>  ViewCVV()));
                   },
                 )
               ],
             ),
 
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(left: 40, top: 15),
+                  margin: const EdgeInsets.only( top: 15),
                   child: const Text(
                     "Change Pin",
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(left: 45, top: 15),
+                  margin: const EdgeInsets.only( top: 15),
                   child: const Text(
                     "View CVV",
                     style: TextStyle(fontSize: 15, color: Colors.white),
