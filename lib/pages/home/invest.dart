@@ -28,7 +28,7 @@ class Invest extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Invest & Stocks"),
-        backgroundColor: Color(0xFF363636),
+        backgroundColor: const Color(0xFF363636),
       ),
       body: SafeArea(
         child: ListView.builder(
@@ -56,15 +56,15 @@ class Invest extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(item.stocks_name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+                              Text(item.stocks_name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("${formatPrice(item.stocks_price)}"),
+                                  Text(formatPrice(item.stocks_price)),
                                   Row(
                                     children: [
                                       Text(
-                                        "${formatMargin(item.stocks_margin)}",
+                                        formatMargin(item.stocks_margin),
                                         style: TextStyle(
                                           color: getMarginColor(item.stocks_margin),
                                           fontSize: 12,
