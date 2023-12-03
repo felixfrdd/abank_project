@@ -19,14 +19,20 @@ class _TransferPageState extends State<TransferPage> {
     {'name': 'Robin', 'acc': '0345328120'},
   ];
   List<Map<String, String>> _foundCustomer = [];
-  final _textEditingController = TextEditingController();
+  final _accountListSearch = TextEditingController();
 
   @override
-  initState() {
+  void initState() {
     _allCustomer
         .sort((a, b) => a["name"].toString().compareTo(b["name"].toString()));
     _foundCustomer = _allCustomer;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _accountListSearch.dispose();
+    super.dispose();
   }
 
   void _runFilter(String enteredKeyword) {
@@ -51,6 +57,7 @@ class _TransferPageState extends State<TransferPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF363636),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
@@ -96,10 +103,11 @@ class _TransferPageState extends State<TransferPage> {
               Container(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(children: [
-                  TextField(
-                    controller: _textEditingController,
+                  TextFormField(
+                    controller: _accountListSearch,
                     onChanged: (value) => _runFilter(value),
                     autofocus: false,
+                    keyboardType: TextInputType.text,
                     style: const TextStyle(
                       fontSize: 22.0,
                       color: Color(0xFF000000),
@@ -108,6 +116,7 @@ class _TransferPageState extends State<TransferPage> {
                       filled: true,
                       fillColor: const Color(0xFFD9D9D9),
                       hintText: 'Search',
+                      isCollapsed: true,
                       prefixIcon: const Icon(
                         Icons.search,
                         size: 30.0,
@@ -119,81 +128,88 @@ class _TransferPageState extends State<TransferPage> {
                         splashColor: Colors.transparent,
                         splashRadius: 20.0,
                         onPressed: () {
-                          _textEditingController.clear();
+                          _accountListSearch.clear();
                           _runFilter('');
                         },
                       ),
-                      contentPadding: const EdgeInsets.all(10.0),
+                      contentPadding: const EdgeInsets.all(10),
                       enabledBorder: UnderlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Color(0xFFD9D9D9)),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 56, 56, 56)),
+                        borderRadius: BorderRadius.circular(50),
                       ),
                     ),
                   )
                 ]),
               ),
-              SizedBox(
-                height: 500,
-                width: 380,
-                child: Container(
-                  padding: const EdgeInsets.all(15.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.0),
-                    color: const Color(0xFF4B4B4B),
-                  ),
-                  child: Column(children: [
-                    const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Account List',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Color(0xFFFFFFFF),
-                        ),
-                      ),
+              Expanded(
+                flex: 12,
+                child: SizedBox(
+                  width: 380,
+                  child: Container(
+                    padding: const EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: const Color(0xFF4B4B4B),
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: _foundCustomer.length,
-                        itemBuilder: (context, index) => Card(
-                          color: const Color(0xFFD9D9D9),
-                          margin: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: ListTile(
-                            title: Text(
-                              _foundCustomer[index]['name'].toString(),
-                              style: const TextStyle(
-                                color: Color(0xFF000000),
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                              ),
-                            ),
-                            subtitle:
-                                Text(_foundCustomer[index]["acc"].toString(),
-                                    style: const TextStyle(
-                                      color: Color(0xFF000000),
-                                      fontSize: 16.0,
-                                    )),
-                            onTap: () {
-                              String customerName =
-                                  _foundCustomer[index]["name"].toString();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TransferAccountPage(
-                                        allCustomer: _allCustomer),
-                                  ));
-                            },
+                    child: Column(children: [
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Account List',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Color(0xFFFFFFFF),
                           ),
                         ),
                       ),
-                    ),
-                  ]),
+                      Expanded(
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: _foundCustomer.length,
+                          itemBuilder: (context, index) => Card(
+                            color: const Color(0xFFD9D9D9),
+                            margin: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: ListTile(
+                              title: Text(
+                                _foundCustomer[index]['name'].toString(),
+                                style: const TextStyle(
+                                  color: Color(0xFF000000),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                              subtitle:
+                                  Text(_foundCustomer[index]["acc"].toString(),
+                                      style: const TextStyle(
+                                        color: Color(0xFF000000),
+                                        fontSize: 16.0,
+                                      )),
+                              onTap: () {
+                                String customerName =
+                                    _foundCustomer[index]["name"].toString();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => TransferAccountPage(
+                                          allCustomer: _allCustomer),
+                                    ));
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ),
                 ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(),
               ),
             ]),
       ),

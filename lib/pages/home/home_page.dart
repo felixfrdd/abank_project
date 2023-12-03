@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'package:abank_project/pages/home/bill.dart';
+
+
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final Function(int) onIndexChanged;
+
+  const HomePage({Key? key, required this.onIndexChanged}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -22,6 +27,7 @@ class _HomePageState extends State<HomePage> {
         : "132, 312, 341, 512.00";
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFF363636),
       body: Column(
         children: [
@@ -139,7 +145,9 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  widget.onIndexChanged(1);
+                },
                 child: Container(
                     width: 100,
                     height: 100,
@@ -159,7 +167,8 @@ class _HomePageState extends State<HomePage> {
                     )),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => BillScreen()));},
                 child: Container(
                     width: 100,
                     height: 100,
@@ -171,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.corporate_fare,
                           size: 60,
                         ),
                         Text("Bill")
@@ -191,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.atm,
                           size: 60,
                         ),
                         Text("Top Up")
@@ -219,7 +228,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.wallet_giftcard,
                           size: 60,
                         ),
                         Text("E-Money")
@@ -239,7 +248,7 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
-                          Icons.swap_horiz,
+                          Icons.add_chart,
                           size: 60,
                         ),
                         Text("Invest")

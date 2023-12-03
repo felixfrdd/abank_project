@@ -1,7 +1,7 @@
 import 'package:abank_project/pages/myaccount/gabForgotPin.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:abank_project/pages/myaccount/my_account.dart';
+// import 'package:abank_project/pages/myaccount/my_account.dart';
 import 'package:flutter/services.dart';
 // import 'package:firebase_core/firebase_core.dart';
 
@@ -14,9 +14,11 @@ class ChangePin extends StatefulWidget {
 }
 
 class _ChangePinState extends State<ChangePin> {
-  final TextEditingController _currentPasswordController = TextEditingController();
+  final TextEditingController _currentPasswordController =
+      TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +34,8 @@ class _ChangePinState extends State<ChangePin> {
           leading: BackButton(
             color: Colors.black,
             onPressed: () {
-              Navigator.push(
+              Navigator.pop(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const MyAccount(),
-                ),
               );
             },
           ),
