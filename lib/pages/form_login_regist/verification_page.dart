@@ -78,12 +78,11 @@ class _VerificationPageState extends State<VerificationPage> {
         FirebaseAuth.instance.currentUser!.email!,
       ),
       builder: (context, snapshot) {
-        bool isUserRegistered = snapshot.data ?? false;
-        print(snapshot.data);
         if (snapshot.data == true && isEmailVerified) {
           return const BottomNavbar();
         } else if (snapshot.data == false && isEmailVerified) {
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             body: SafeArea(
               child: Form(
                 child: SingleChildScrollView(
@@ -190,6 +189,7 @@ class _VerificationPageState extends State<VerificationPage> {
           );
         }
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: const Color(0xFF363636),
           body: SafeArea(
             child: SingleChildScrollView(

@@ -1,9 +1,14 @@
+import 'package:abank_project/firebase/firestore_user_new_bank_account.dart';
+import 'package:abank_project/widgets_and_functions/snackbar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:abank_project/widgets_and_functions/build_back_button.dart';
 import 'package:flutter/services.dart';
 
 class NewAccountPage extends StatefulWidget {
-  const NewAccountPage({super.key});
+  final Function fetchData;
+
+  const NewAccountPage({Key? key, required this.fetchData}) : super(key: key);
 
   @override
   State<NewAccountPage> createState() => _NewAccountPageState();
@@ -13,6 +18,9 @@ class _NewAccountPageState extends State<NewAccountPage> {
   final _newAccountController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FirestoreUserNewBankAccount _firestoreNewAcc =
+      FirestoreUserNewBankAccount();
+
   @override
   void dispose() {
     _newAccountController.dispose();
@@ -117,13 +125,47 @@ class _NewAccountPageState extends State<NewAccountPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       )),
-                  onPressed: () {
+                  onPressed: () async {
                     final isValid = _formKey.currentState!.validate();
                     if (!isValid) return;
+                    try {
+                      if (await _firestoreNewAcc.isMyOwnAccountNumber(
+                        FirebaseAuth.instance.currentUser!.email!,
+                        _newAccountController.text,
+                      )) {
+                        _focusNode.unfocus();
+                        showErrorSnackBar(
+                            context, 'Cannot add your own account number');
+                        return;
+                      } else if (await _firestoreNewAcc.isAvailableNewAccNum(
+                            FirebaseAuth.instance.currentUser!.email!,
+                            _newAccountController.text,
+                          ) &&
+                          await _firestoreNewAcc.isAccNumNotExistInCurrentUser(
+                            _newAccountController.text,
+                            FirebaseAuth.instance.currentUser!.email!,
+                          )) {
+                        await _firestoreNewAcc.storeNewAccount(
+                            FirebaseAuth.instance.currentUser!.email!,
+                            await _firestoreNewAcc
+                                .whoseAccNumber(_newAccountController.text),
+                            _newAccountController.text);
+                      } else {
+                        _focusNode.unfocus();
+                        showErrorSnackBar(
+                            context, 'Account already exist in the list');
+                        return;
+                      }
+                    } catch (e) {
+                      _focusNode.unfocus();
+                      showErrorSnackBar(context, 'No account found');
+                      return;
+                    }
                     _showDialog(
                         context, 'Added', 'Account added to Account List');
                     _newAccountController.clear();
                     _focusNode.unfocus();
+                    await widget.fetchData();
                   },
                   child: const Text('Confirm'),
                 ),
