@@ -22,9 +22,7 @@ Future main() async {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              //TODO: uncomment return VerificationPage buat aktifin email verification
               return const VerificationPage();
-              // return const BottomNavbar();
             } else {
               return const MyCarousel();
             }
