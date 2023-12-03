@@ -16,7 +16,10 @@ class TransferHistoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Transfer"),
+        title: const Text(
+          "Transfer",
+          style: TextStyle(fontSize: 20),
+        ),
         backgroundColor: const Color(0xFF363636),
       ),
       body: ListView.builder(
@@ -47,7 +50,7 @@ class TransferHistoryPage extends StatelessWidget {
                           children: [
                             Text(
                               stocksList[index].history_name,
-                              style: const TextStyle(fontSize: 25),
+                              style: const TextStyle(fontSize: 20),
                             ),
                             Row(
                               children: [
@@ -57,7 +60,7 @@ class TransferHistoryPage extends StatelessWidget {
                                   style: TextStyle(
                                     color: getCurrencyColor(
                                         stocksList[index].history_currency),
-                                    fontSize: 20,
+                                    fontSize: 17,
                                   ),
                                 ),
                               ],
