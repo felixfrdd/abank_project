@@ -26,7 +26,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
         setIndex(index);
       }),
       const TransferPage(),
-      const TransferHistoryPage(),
+      TransferHistoryPage(),
       const MyAccount()
     ];
   }
@@ -46,15 +46,14 @@ class _BottomNavbarState extends State<BottomNavbar> {
         backgroundColor: Colors.white,
         elevation: 0,
         onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const QRScanner(),
-            ));
-          },
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const QRScanner(),
+          ));
+        },
         child: Icon(Icons.qr_code_scanner, color: Colors.black, size: 30),
       ),
       bottomNavigationBar: NavigationBar(
         indicatorColor: Color(0xFFD9D9D9),
-        
         backgroundColor: Colors.white,
         height: 70,
         selectedIndex: _indexBotNav,
