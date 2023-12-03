@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:abank_project/pages/home/bill.dart';
 import 'package:abank_project/pages/home/invest.dart';
+import 'package:intl/intl.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         : "1234 1234 1234 1234";
     String showbalance = isBalanceVisible
         ? "* * * * * * * * * * * * * * * *"
-        : "132, 312, 341, 512.00";
+        : formatPrice(132312413512.00);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -267,5 +268,9 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+    String formatPrice(double value) {
+    final formatter = NumberFormat.currency(locale: 'id_ID', symbol: 'Rp');
+    return formatter.format(value);
   }
 }
